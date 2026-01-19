@@ -1,13 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arch1v3d</title>
 
-  <!-- ✅ 캐시 무력화용 v=... 꼭 유지 -->
-  <link rel="stylesheet" href="style.css?v=20260119_2" />
+  <!-- ✅ 캐시 뚫기 -->
+  <link rel="stylesheet" href="style.css?v=999" />
 </head>
+
 <body>
   <div class="bg"></div>
   <div class="scanlines"></div>
@@ -15,39 +16,30 @@
   <div class="vignette"></div>
 
   <main class="stage">
-    <section class="window-shell" aria-label="window">
+    <section class="window-shell" aria-label="window placeholder">
       <div class="window-glow"></div>
 
-      <!-- ✅ controls (frame 영역에 박힘) -->
-      <div class="win-controls" aria-label="window controls">
-        <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
-        <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
-        <button class="ctrl-btn ctrl-close" type="button" id="openExitPopup" aria-label="close"></button>
-      </div>
+      <div class="window-placeholder">
+        <!-- ✅ 문구(타이틀) 숨길 거라 남겨도 됨 -->
+        <div class="titlebar">
+          <div class="title-left">
+            <span class="app-dot">b</span>
+            <span class="app-title">arch1v3d</span>
+            <span class="app-sub">— but not resolved.</span>
+          </div>
 
-      <!-- ✅ inner -->
-      <div class="content"></div>
+          <div class="win-controls">
+            <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
+            <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
+            <button class="ctrl-btn ctrl-close" id="openExitPopup" type="button" aria-label="close"></button>
+          </div>
+        </div>
+
+        <div class="window-body"></div>
+      </div>
     </section>
   </main>
 
-  <!-- XP POPUP -->
-  <div class="xp-overlay" id="xpOverlay" aria-hidden="true">
-    <div class="xp-window" role="dialog" aria-modal="true" aria-labelledby="xpTitle">
-      <div class="xp-titlebar">
-        <div class="xp-title" id="xpTitle">System message</div>
-        <button class="xp-x" type="button" id="xpCloseX" aria-label="close">×</button>
-      </div>
-
-      <div class="xp-body">
-        <div class="xp-message">this is not the exit!</div>
-        <div class="xp-actions">
-          <button class="xp-btn" type="button" id="xpOk">Ok</button>
-          <button class="xp-btn xp-dead" type="button" aria-disabled="true" tabindex="-1">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js?v=20260119_2"></script>
+  <script src="app.js?v=999"></script>
 </body>
 </html>
