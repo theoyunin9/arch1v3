@@ -27,3 +27,29 @@ xpOverlay?.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && xpOverlay.classList.contains("is-open")) closeXp();
 });
+
+const openBtn = document.getElementById("openExitPopup");
+const overlay = document.getElementById("xpOverlay");
+const closeX = document.getElementById("xpCloseX");
+const okBtn = document.getElementById("xpOk");
+
+function openPopup(){
+  overlay.classList.add("is-open");
+  overlay.setAttribute("aria-hidden", "false");
+}
+
+function closePopup(){
+  overlay.classList.remove("is-open");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+openBtn?.addEventListener("click", openPopup);
+closeX?.addEventListener("click", closePopup);
+okBtn?.addEventListener("click", closePopup);
+
+// overlay 바깥 클릭은 닫히지 않게(원하면 지워도 됨)
+overlay?.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    // 아무것도 안 함
+  }
+});
