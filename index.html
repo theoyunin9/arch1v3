@@ -1,56 +1,118 @@
+<!-- HTML -->
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>arch1v3</title>
-
-  <!-- ✅ 픽셀 폰트 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ARCHIV3D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css?v=20260119b" />
 </head>
+
 <body>
-  <div class="bg"></div>
-  <div class="scanlines"></div>
-  <div class="noise"></div>
-  <div class="vignette"></div>
+  <div class="bg-scribble"></div>
 
   <main class="stage">
-    <section class="window-shell" aria-label="window">
-      <div class="win-controls">
-        <button class="ctrl-btn ctrl-min" id="btnMin" type="button" aria-label="minimize"></button>
-        <button class="ctrl-btn ctrl-max" id="btnMax" type="button" aria-label="maximize"></button>
-        <button class="ctrl-btn ctrl-close" id="btnClose" type="button" aria-label="close"></button>
+    <section class="window" role="application" aria-label="ARCHIV3D window">
+      <!-- title bar -->
+      <header class="titlebar">
+        <div class="title">
+          <span class="brand">ARCHIV3D</span>
+          <span class="sub">- but not resolved</span>
+        </div>
+
+        <div class="top-right">
+          <div class="status-pill">まだ loading 中……</div>
+
+          <div class="traffic">
+            <button class="dot red"   data-modal="red"   aria-label="red alert"></button>
+            <button class="dot yellow" data-modal="yellow" aria-label="yellow alert"></button>
+            <button class="dot green"  data-modal="green"  aria-label="green alert"></button>
+          </div>
+        </div>
+      </header>
+
+      <!-- content -->
+      <div class="content">
+        <section class="panel left">
+          <div class="tabs">
+            <button class="tab is-active" data-tab="calendar">CALENDER</button>
+            <button class="tab" data-tab="memo">MEMO</button>
+          </div>
+
+          <div class="left-top">
+            <div class="box big">
+              <div class="box-title">일정정리 / 메모 / 링크</div>
+              <div class="box-body faint">
+                error404; error404; error404; error404;
+              </div>
+            </div>
+
+            <div class="box small">
+              <div class="box-title">controls</div>
+              <div class="box-body faint">▶︎ ◼︎ ◀︎</div>
+            </div>
+          </div>
+
+          <div class="list">
+            <button class="link">Click here to literature</button>
+            <button class="link">Click here to aesthetics</button>
+            <button class="link">Click here to memory</button>
+            <button class="link">Click here to sequence</button>
+          </div>
+        </section>
+
+        <aside class="panel right">
+          <div class="box">
+            <div class="box-title">Quick?</div>
+            <div class="btnrow">
+              <button class="mini">열림</button>
+              <button class="mini">닫힘</button>
+              <button class="mini">통제중</button>
+            </div>
+            <div class="note faint">사건번호: ████</div>
+          </div>
+
+          <div class="box">
+            <div class="box-title">log</div>
+            <div class="box-body faint">
+              0ツヅキアマデ繋ガラナイ…<br/>
+              なんで？
+            </div>
+          </div>
+        </aside>
       </div>
 
-      <div class="window-main">
-        <div class="white-card" aria-label="white window"></div>
-      </div>
+      <!-- bottom -->
+      <footer class="bottombar">
+        <div class="dots">
+          <span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="where">You are <u>safe</u> here…</div>
+
+        <form class="search" onsubmit="return false;">
+          <input class="search-input" placeholder="검색창" />
+          <button class="search-btn" aria-label="search">🔎</button>
+        </form>
+      </footer>
     </section>
   </main>
 
-  <!-- ✅ XP 경고창 -->
-  <div class="xp-overlay" id="xpOverlay" aria-hidden="true">
-    <div class="xp-window" role="dialog" aria-modal="true" aria-labelledby="xpTitle">
-      <div class="xp-titlebar">
-        <div class="xp-title" id="xpTitle">system message</div>
-        <button class="xp-x" id="xpX" type="button" aria-label="close popup">X</button>
+  <!-- modal -->
+  <div class="overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div id="modalTitle" class="modal-title">ALERT</div>
+        <button class="modal-x" aria-label="close">x</button>
       </div>
-
-      <div class="xp-body">
-        <div class="xp-message" id="xpMsg"></div>
-
-        <div class="xp-actions">
-          <button class="xp-btn" id="xpOk" type="button">OK</button>
-          <button class="xp-btn" id="xpCancel" type="button">Cancel</button>
-        </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-actions">
+        <button class="cancel">Cancel</button>
+        <button class="ok">OK</button>
       </div>
     </div>
   </div>
-
-  <script src="app.js?v=20260119b"></script>
 </body>
 </html>
