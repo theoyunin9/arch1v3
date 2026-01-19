@@ -2,14 +2,22 @@
 html, body { height: 100%; }
 
 :root{
+  /* 4:3 고정 */
   --stage-ratio: 4 / 3;
 
+  /* 크기 */
   --max-w: 980px;
   --pad: 48px;
 
-  /* 프레임 색 2단 */
-  --frame-outer: rgba(135, 175, 210, 0.75);  /* 바깥쪽(좀 더 진한 하늘) */
-  --frame-inner: rgba(190, 225, 250, 0.92);  /* 안쪽(연한 하늘) */
+  /* ✅ 빨간 동그라미(연한 하늘색 프레임) 두께 */
+  --frame: 28px;                  /* <-- 여기 올리면 더 두꺼워짐 */
+  --frame-color: rgba(170, 205, 235, 0.95);
+
+  /* 쉘 */
+  --shell-radius: 22px;
+
+  /* inner */
+  --inner-radius: 16px;
 }
 
 body{
@@ -65,28 +73,24 @@ body{
   padding: calc(var(--pad) / 2);
 }
 
-/* ✅ 4:3 윈도우 프레임 */
+/* ✅ 4:3 window */
 .window-shell{
   position: relative;
-
-  /* 가로/세로 둘 다 고려해서 자동 스케일 */
   width: min(var(--max-w), 92vw, calc((100vh - var(--pad)) * (4/3)));
   aspect-ratio: var(--stage-ratio);
+  border-radius: var(--shell-radius);
 
-  border-radius: 18px;
+  /* ✅ 빨간 동그라미: 연한 하늘색 프레임을 "border"로 */
+  border: var(--frame) solid var(--frame-color);
 
-  /* 바깥 프레임(진한 하늘) */
-  border: 10px solid var(--frame-outer);
-
-  /* 🔥 흰 띠 삭제 + 연한 하늘색 띠를 두껍게 */
+  /* ✅ 파란 동그라미(흰색 링) 원인이던 inset 흰 테두리/하이라이트 전부 제거 */
   box-shadow:
-    0 0 0 16px var(--frame-inner) inset,  /* ← 이게 “안쪽 연한하늘 프레임” 두께 */
     0 26px 80px rgba(0,0,0,0.22);
 
-  background: rgba(245, 250, 255, 0.55);
+  background: rgba(245, 250, 255, 0.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  overflow: hidden;
+  overflow: visible; /* 버튼이 프레임 위에 얹히니까 */
 }
 
 .window-glow{
@@ -96,43 +100,71 @@ body{
   pointer-events: none;
 }
 
-/* inner canvas (프레임 두꺼워져서 inset도 같이 늘림) */
-.window-placeholder{
+/* ✅ inner canvas: 프레임만큼 안으로 */
+.window-inner{
   position: absolute;
-  inset: 34px;                 /* 프레임 띠 두꺼워진 만큼 더 안쪽으로 */
-  border-radius: 14px;
-  background: rgba(255,255,255,0.72);
+  inset: 0; /* border 안쪽을 채우게 */
+  border-radius: calc(var(--shell-radius) - 2px);
+  overflow: hidden;
+}
+
+/* 실제 흰 캔버스 */
+.content{
+  position: absolute;
+  inset: 14px; /* 캔버스 여백 */
+  border-radius: var(--inner-radius);
+  background: rgba(255,255,255,0.80);
   border: 1px solid rgba(150, 180, 210, 0.35);
   box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
 }
 
-/* ✅ 버튼을 “연한 하늘색 프레임 위”에 얹기 */
-.win-controls{
+/* 위쪽 얇은 strip (원하면 삭제 가능) */
+.top-strip{
   position: absolute;
-  top: 14px;                   /* 연한 하늘색 띠 영역 안에 들어가게 */
-  right: 18px;
-  display: flex;
-  gap: 10px;
-  z-index: 30;
+  left: 0; right: 0;
+  top: 10px;
+  height: 18px;
+  opacity: 0.35;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0));
+  pointer-events: none;
 }
 
-/* 버튼: 색 동그라미만 */
+/* ✅ 버튼: "연한 하늘색 프레임 위"에 고정 */
+.win-controls{
+  position: absolute;
+
+  /* 프레임(=border) 안쪽 상단에 얹히게 */
+  top: calc(var(--frame) * 0.35);
+  right: calc(var(--frame) * 0.35);
+
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
 .ctrl-btn{
   width: 18px;
   height: 18px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.22);
+  border: 1px solid rgba(0,0,0,0.25);
   cursor: pointer;
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.75) inset,
-    0 1px 2px rgba(0,0,0,.12);
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 1px 2px rgba(0,0,0,.12);
 }
 
+/* ✅ 버튼 "색만 남김" (아이콘/글자 없음) */
 .ctrl-min{ background:#ffd047; }
 .ctrl-max{ background:#58d66a; }
 .ctrl-close{ background:#ff5a5a; }
 
 .ctrl-btn:active{ transform: translateY(1px); }
+
+/* mobile */
+@media (max-width: 520px){
+  :root{
+    --max-w: 520px;
+    --frame: 26px;
+  }
+}
 
 /* ===== XP popup ===== */
 .xp-overlay{
@@ -195,7 +227,7 @@ body{
   text-transform: lowercase;
   letter-spacing: .6px;
   line-height: 1.25;
-  font-family: "Press Start 2P", "VT323", ui-monospace, monospace;
+  font-family: ui-monospace, "Courier New", monospace;
   font-size: 14px;
 }
 
@@ -212,8 +244,7 @@ body{
   border: 2px solid #3a3a3a;
   box-shadow: 0 2px 0 #ffffff inset;
   cursor: pointer;
-  font-size: 18px;
-  font-family: "VT323", ui-monospace, monospace;
+  font-size: 14px;
 }
 
 .xp-btn:active{ transform: translateY(1px); }
