@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- background layers -->
   <div class="bg"></div>
   <div class="scanlines"></div>
   <div class="noise"></div>
@@ -18,17 +17,15 @@
     <section class="window-shell">
       <div class="window-glow"></div>
 
-      <!-- ✅ 연한 하늘색 프레임 안쪽 영역 -->
+      <!-- ✅ 버튼을 "파란 프레임 위"로: window-placeholder 밖으로 뺌 -->
+      <div class="win-controls">
+        <button class="ctrl-btn ctrl-min" aria-label="minimize"></button>
+        <button class="ctrl-btn ctrl-max" aria-label="maximize"></button>
+        <button class="ctrl-btn ctrl-close" id="openExitPopup" aria-label="close"></button>
+      </div>
+
+      <!-- ✅ 안쪽 흰색 띠/여백 없애기: placeholder를 프레임 안에 꽉 채움 -->
       <div class="window-placeholder">
-
-        <!-- ✅ 버튼: 반드시 여기 안에 있어야 함 -->
-        <div class="win-controls">
-          <button class="ctrl-btn ctrl-min" aria-label="minimize"></button>
-          <button class="ctrl-btn ctrl-max" aria-label="maximize"></button>
-          <button class="ctrl-btn ctrl-close" id="openExitPopup" aria-label="close"></button>
-        </div>
-
-        <!-- 내용 영역 (비워둠) -->
         <div class="window-body"></div>
       </div>
     </section>
