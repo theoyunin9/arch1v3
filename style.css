@@ -46,10 +46,9 @@ body {
 }
 
 /* === STAGE: fixed ratio regardless of device === */
-/* choose a ratio close to your reference “window screenshot” */
 :root{
   --stage-w: min(92vw, 980px);
-  --stage-ratio: 16 / 9; /* 바꿀 수 있음 (예: 4/3, 3/2) */
+  --stage-ratio: 4 / 3; /* ✅ 여기! 4:3 고정 */
 }
 
 .stage{
@@ -59,7 +58,7 @@ body {
   padding: 24px;
 }
 
-/* this keeps the same ratio */
+/* keeps same ratio */
 .window-shell{
   position: relative;
   width: var(--stage-w);
@@ -82,15 +81,37 @@ body {
   pointer-events: none;
 }
 
+/* inner canvas */
 .window-placeholder{
-  position: absolute; inset: 18px;
+  position: absolute;
+  inset: 18px;
   border-radius: 14px;
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(150, 180, 210, 0.35);
   box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
-  display: grid;
-  place-items: center;
-  text-align: center;
+  overflow: hidden;
+}
+
+/* ✅ titlebar pinned TOP inside window */
+.titlebar{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 10px;
+  pointer-events: auto;
+}
+
+.title-left{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 }
 
 .tiny{
@@ -105,14 +126,8 @@ body {
   opacity: 0.55;
 }
 
-/* 모바일에서 너무 커지면 stage 폭만 줄여줌 */
-@media (max-width: 520px){
-  :root{ --stage-w: min(94vw, 520px); }
-}
-
-/* ===== top-right window controls (mac-ish) ===== */
+/* ✅ controls on TOP-RIGHT */
 .win-controls{
-  margin-left:auto;
   display:flex;
   gap:8px;
   align-items:center;
@@ -130,6 +145,7 @@ body {
   display:grid;
   place-items:center;
   cursor:pointer;
+  opacity: 0.95;
   box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 1px 2px rgba(0,0,0,.15);
 }
 
@@ -137,6 +153,11 @@ body {
 .ctrl-max{ background:#58d66a; }
 .ctrl-close{ background:#ff5a5a; }
 .ctrl-btn:active{ transform: translateY(1px); }
+
+/* 모바일에서 너무 커지면 stage 폭만 줄여줌 */
+@media (max-width: 520px){
+  :root{ --stage-w: min(94vw, 520px); }
+}
 
 /* ===== XP popup (system message) ===== */
 .xp-overlay{
@@ -205,7 +226,7 @@ body {
   font-size:16px;
   line-height:1.2;
   text-shadow: 0 0 1px rgba(0,0,0,.25);
-  font-family: ui-monospace, "Courier New", monospace; /* 픽셀 느낌 가까운 기본 */
+  font-family: ui-monospace, "Courier New", monospace;
 }
 
 .xp-actions{
