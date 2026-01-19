@@ -214,3 +214,19 @@ body{
   cursor:not-allowed;
   pointer-events:none;
 }
+
+/* ===== 클릭 막는 장식 레이어 전부 무력화 ===== */
+.bg,
+.scanlines,
+.noise,
+.vignette,
+.window-glow {
+  pointer-events: none;
+}
+
+/* ===== 버튼은 항상 최상단 + 클릭 가능 ===== */
+.win-controls {
+  position: absolute;
+  z-index: 99999;
+  pointer-events: auto;
+}
