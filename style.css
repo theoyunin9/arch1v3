@@ -1,6 +1,7 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; }
-body {
+
+body{
   margin: 0;
   overflow: hidden;
   background: #dbeeff;
@@ -48,7 +49,7 @@ body {
 /* === STAGE: fixed ratio regardless of device === */
 :root{
   --stage-w: min(92vw, 980px);
-  --stage-ratio: 4 / 3;
+  --stage-ratio: 4 / 3; /* ✅ 4:3 고정 */
 }
 
 .stage{
@@ -60,17 +61,21 @@ body {
 
 /* keeps same ratio */
 .window-shell{
-  position: relative;
+  position: relative; /* ✅ 버튼 absolute 기준점 */
   width: var(--stage-w);
   aspect-ratio: var(--stage-ratio);
   border-radius: 18px;
+
   background: rgba(245, 250, 255, 0.55);
-  border: 3px solid rgba(170, 205, 235, 0.9); /* 두께 + 색 */
+
+  /* ✅ 테두리 더 두껍게 */
+  border: 4px solid rgba(160, 200, 235, 0.95);
+
   box-shadow:
     0 26px 80px rgba(0,0,0,0.22),
     0 2px 0 rgba(255,255,255,0.65) inset,
-    0 0 0 2px rgba(255,255,255,0.6) inset; /* 안쪽 하이라이트 */
-}
+    0 0 0 2px rgba(255,255,255,0.6) inset;
+
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
@@ -89,24 +94,27 @@ body {
   inset: 18px;
   border-radius: 14px;
   background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(150, 180, 210, 0.35);
+
+  /* ✅ 안쪽 테두리 살짝 두껍게 */
+  border: 2px solid rgba(255,255,255,0.85);
+
   box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
   overflow: hidden;
 }
 
-/* ✅ titlebar pinned TOP inside window */
+/* ✅ titlebar */
 .titlebar{
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
+  top: 16px;
+  left: 18px;
+  right: 18px;
   height: 44px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
 
-  padding: 0 10px;
+  z-index: 5;
   pointer-events: auto;
 }
 
@@ -116,38 +124,34 @@ body {
   gap: 10px;
 }
 
-.tiny{
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  opacity: 0.75;
-}
-
-.tiny2{
-  margin-top: 6px;
-  font-size: 12px;
-  opacity: 0.55;
-}
-
-/* ✅ controls on TOP-RIGHT */
+/* ✅ controls moved to the "top-right corner area" (네가 동그라미친 자리) */
 .win-controls{
-  display:flex;
-  gap:8px;
-  align-items:center;
+  position: absolute;
+  top: 14px;      /* ✅ 모서리 위치 조절 */
+  right: 18px;    /* ✅ 모서리 위치 조절 */
+
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 10;
 }
 
 .ctrl-btn{
-  width:22px;
-  height:22px;
-  border-radius:999px;
-  border:1px solid rgba(0,0,0,.35);
-  background:#fff;
-  color:#111;
-  font-size:14px;
-  line-height:1;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(0,0,0,.35);
+  color: #111;
+  font-size: 14px;
+  line-height: 1;
+
+  display: grid;
+  place-items: center;
+
+  cursor: pointer;
   opacity: 0.95;
+
   box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 1px 2px rgba(0,0,0,.15);
 }
 
@@ -156,7 +160,7 @@ body {
 .ctrl-close{ background:#ff5a5a; }
 .ctrl-btn:active{ transform: translateY(1px); }
 
-/* 모바일에서 너무 커지면 stage 폭만 줄여줌 */
+/* 모바일에서 stage 폭만 줄여줌 */
 @media (max-width: 520px){
   :root{ --stage-w: min(94vw, 520px); }
 }
@@ -182,7 +186,7 @@ body {
 
 .xp-titlebar{
   height:34px;
-  background:#0b2e8a; /* XP blue */
+  background:#0b2e8a;
   color:#fff;
   display:flex;
   align-items:center;
@@ -252,36 +256,5 @@ body {
 .xp-dead{
   opacity:.55;
   cursor:not-allowed;
-  pointer-events:none; /* Cancel 먹통 */
-}
-
-/* === move buttons to top-right corner inside the window === */
-.titlebar{
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  right: 18px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-}
-
-.win-controls{
-  position: absolute;
-  top: 10px;     /* 살짝 아래 */
-  right: 12px;   /* 우측 모서리 */
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* === window control buttons: top-right corner === */
-.win-controls{
-  position: absolute;
-  top: 16px;     /* 위에서 얼마나 내려올지 */
-  right: 20px;   /* 오른쪽에서 얼마나 떨어질지 */
-
-  display: flex;
-  gap: 8px;
-  z-index: 10;
+  pointer-events:none;
 }
