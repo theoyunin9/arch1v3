@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arch1v3d</title>
 
-  <!-- ✅ 캐시 뚫기 -->
-  <link rel="stylesheet" href="style.css?v=999" />
+  <!-- 캐시 뚫기 -->
+  <link rel="stylesheet" href="style.css?v=1001" />
 </head>
 
 <body>
@@ -16,30 +16,23 @@
   <div class="vignette"></div>
 
   <main class="stage">
-    <section class="window-shell" aria-label="window placeholder">
+    <section class="window-shell" aria-label="window">
       <div class="window-glow"></div>
 
+      <!-- ✅ 버튼은 프레임 위(= window-shell 바로 아래) -->
+      <div class="win-controls" aria-label="window controls">
+        <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
+        <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
+        <button class="ctrl-btn ctrl-close" id="openExitPopup" type="button" aria-label="close"></button>
+      </div>
+
+      <!-- ✅ 메인 화면(쌩화이트) -->
       <div class="window-placeholder">
-        <!-- ✅ 문구(타이틀) 숨길 거라 남겨도 됨 -->
-        <div class="titlebar">
-          <div class="title-left">
-            <span class="app-dot">b</span>
-            <span class="app-title">arch1v3d</span>
-            <span class="app-sub">— but not resolved.</span>
-          </div>
-
-          <div class="win-controls">
-            <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
-            <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
-            <button class="ctrl-btn ctrl-close" id="openExitPopup" type="button" aria-label="close"></button>
-          </div>
-        </div>
-
         <div class="window-body"></div>
       </div>
     </section>
   </main>
 
-  <script src="app.js?v=999"></script>
+  <script src="app.js?v=1001"></script>
 </body>
 </html>
