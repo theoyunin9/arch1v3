@@ -103,12 +103,12 @@ box-shadow:
 
 /* ✅ 메인 화면: 완전 쌩화이트 */
 .window-placeholder{
-  position: absolute;
+  position:absolute;
   inset: calc(var(--outer) + var(--frame) + var(--gap));
   border-radius: 16px;
-  background: #ffffff !important;
-  border: 1px solid rgba(150,180,210,0.18);
-  overflow: hidden;
+  background:#ffffff !important;
+  border:none;              /* 🔥 이게 핵심 */
+  overflow:hidden;
 }
 
 .window-body{
