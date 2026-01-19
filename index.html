@@ -4,7 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>arch1v3</title>
-  <link rel="stylesheet" href="style.css?v=20260119" />
+
+  <!-- ✅ 픽셀 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=20260119b" />
 </head>
 <body>
   <div class="bg"></div>
@@ -13,19 +19,38 @@
   <div class="vignette"></div>
 
   <main class="stage">
-    <section class="window-shell">
-      <!-- 버튼(프레임 위) -->
-      <div class="win-controls" aria-hidden="true">
-        <button class="ctrl-btn ctrl-min" type="button"></button>
-        <button class="ctrl-btn ctrl-max" type="button"></button>
-        <button class="ctrl-btn ctrl-close" type="button"></button>
+    <section class="window-shell" aria-label="window">
+      <div class="win-controls">
+        <button class="ctrl-btn ctrl-min" id="btnMin" type="button" aria-label="minimize"></button>
+        <button class="ctrl-btn ctrl-max" id="btnMax" type="button" aria-label="maximize"></button>
+        <button class="ctrl-btn ctrl-close" id="btnClose" type="button" aria-label="close"></button>
       </div>
 
-      <!-- 메인 흰 화면(프레임 끝까지 꽉) -->
-      <div class="window-main"></div>
+      <div class="window-main">
+        <div class="white-card" aria-label="white window"></div>
+      </div>
     </section>
   </main>
 
-  <script src="app.js?v=20260119"></script>
+  <!-- ✅ XP 경고창 -->
+  <div class="xp-overlay" id="xpOverlay" aria-hidden="true">
+    <div class="xp-window" role="dialog" aria-modal="true" aria-labelledby="xpTitle">
+      <div class="xp-titlebar">
+        <div class="xp-title" id="xpTitle">system message</div>
+        <button class="xp-x" id="xpX" type="button" aria-label="close popup">X</button>
+      </div>
+
+      <div class="xp-body">
+        <div class="xp-message" id="xpMsg"></div>
+
+        <div class="xp-actions">
+          <button class="xp-btn" id="xpOk" type="button">OK</button>
+          <button class="xp-btn" id="xpCancel" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=20260119b"></script>
 </body>
 </html>
