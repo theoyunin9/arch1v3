@@ -1,14 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>arch1v3d</title>
-
-  <!-- 캐시 뚫기 -->
-  <link rel="stylesheet" href="style.css?v=1001" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>arch1v3</title>
+  <link rel="stylesheet" href="style.css?v=20260119" />
 </head>
-
 <body>
   <div class="bg"></div>
   <div class="scanlines"></div>
@@ -16,23 +13,19 @@
   <div class="vignette"></div>
 
   <main class="stage">
-    <section class="window-shell" aria-label="window">
-      <div class="window-glow"></div>
-
-      <!-- ✅ 버튼은 프레임 위(= window-shell 바로 아래) -->
-      <div class="win-controls" aria-label="window controls">
-        <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
-        <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
-        <button class="ctrl-btn ctrl-close" id="openExitPopup" type="button" aria-label="close"></button>
+    <section class="window-shell">
+      <!-- 버튼(프레임 위) -->
+      <div class="win-controls" aria-hidden="true">
+        <button class="ctrl-btn ctrl-min" type="button"></button>
+        <button class="ctrl-btn ctrl-max" type="button"></button>
+        <button class="ctrl-btn ctrl-close" type="button"></button>
       </div>
 
-      <!-- ✅ 메인 화면(쌩화이트) -->
-      <div class="window-placeholder">
-        <div class="window-body"></div>
-      </div>
+      <!-- 메인 흰 화면(프레임 끝까지 꽉) -->
+      <div class="window-main"></div>
     </section>
   </main>
 
-  <script src="app.js?v=1001"></script>
+  <script src="app.js?v=20260119"></script>
 </body>
 </html>
