@@ -15,7 +15,7 @@ html, body { height: 100%; }
   --radius: 22px;
 
   /* ✅ 메인 화면 더 크게: gap 줄이기 */
-  --gap: 6px;      /* (기존 10px → 6px) */
+  --gap: 4px;      /* (기존 10px → 6px) */
 
   --ctrl: 18px;
   --ctrl-gap: 10px;
