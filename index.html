@@ -18,12 +18,49 @@
   <main class="stage">
     <section class="window-shell" aria-label="window placeholder">
       <div class="window-glow"></div>
-      <div class="window-placeholder">
-        <div class="tiny">window frame placeholder</div>
-        <div class="tiny2">next: tabs + titlebar + buttons</div>
+<div class="window-placeholder">
+  <!-- TITLE BAR -->
+  <div class="titlebar">
+    <div class="title-left">
+      <span class="app-dot">b</span>
+      <span class="app-title">arch1v3d</span>
+      <span class="app-sub">— but not resolved.</span>
+    </div>
+
+    <!-- 🔴🟡🟢 우측 상단 버튼들 (1-a 여기!) -->
+    <div class="win-controls">
+      <button class="ctrl-btn ctrl-min">–</button>
+      <button class="ctrl-btn ctrl-max">◻</button>
+      <button class="ctrl-btn ctrl-close" id="openExitPopup">×</button>
+    </div>
+  </div>
+
+  <!-- WINDOW BODY (아직 비워둠) -->
+  <div class="window-body">
+    <!-- 나중에 메인 콘텐츠 들어갈 자리 -->
+  </div>
       </div>
     </section>
   </main>
   <script src="app.js"></script>
+<div class="xp-overlay" id="xpOverlay" aria-hidden="true">
+  <div class="xp-window" role="dialog" aria-modal="true" aria-labelledby="xpTitle">
+    <div class="xp-titlebar">
+      <div class="xp-title" id="xpTitle">System message</div>
+      <button class="xp-x" type="button" id="xpCloseX" aria-label="close">×</button>
+    </div>
+
+    <div class="xp-body">
+      <div class="xp-message">
+        this is not the exit!
+      </div>
+
+      <div class="xp-actions">
+        <button class="xp-btn" type="button" id="xpOk">Ok</button>
+        <button class="xp-btn xp-dead" type="button" aria-disabled="true" tabindex="-1">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
