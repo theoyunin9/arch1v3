@@ -1,18 +1,16 @@
-const openBtn = document.getElementById("openExitPopup");
 const overlay = document.getElementById("xpOverlay");
-const okBtn = document.getElementById("xpOk");
+const openBtn = document.getElementById("openExitPopup");
 const closeX = document.getElementById("xpCloseX");
+const okBtn = document.getElementById("xpOk");
 
-function openPopup() {
+openBtn.addEventListener("click", () => {
   overlay.classList.add("is-open");
-  overlay.setAttribute("aria-hidden", "false");
-}
+});
 
-function closePopup() {
+closeX.addEventListener("click", () => {
   overlay.classList.remove("is-open");
-  overlay.setAttribute("aria-hidden", "true");
-}
+});
 
-openBtn?.addEventListener("click", openPopup);
-okBtn?.addEventListener("click", closePopup);
-closeX?.addEventListener("click", closePopup);
+okBtn.addEventListener("click", () => {
+  overlay.classList.remove("is-open");
+});
