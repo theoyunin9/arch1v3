@@ -4,24 +4,22 @@ html, body { height: 100%; }
 :root{
   --ratio: 4 / 3;
 
-  /* ✅ 제일 바깥 진한 파랑: 더 얇게 */
+  /* 바깥 진파랑 얇게 유지 */
   --outer: 1px;
   --outer-color: rgba(90, 135, 175, 0.38);
 
-  /* ✅ 연한 하늘 프레임: 두껍게 유지 */
-  --frame: 46px;
-  --frame-color: rgba(170, 205, 235, 0.95);
+  /* ✅ 연한 하늘 프레임: 조금 얇게 */
+  --frame: 34px;   /* (기존 46px → 34px) */
 
+  --frame-color: rgba(170, 205, 235, 0.95);
   --radius: 22px;
 
-  /* 프레임 안쪽에서 흰 화면까지 여백 */
-  --gap: 10px;
+  /* ✅ 메인 화면 더 크게: gap 줄이기 */
+  --gap: 6px;      /* (기존 10px → 6px) */
 
-  /* 버튼 */
   --ctrl: 18px;
   --ctrl-gap: 10px;
 
-  /* ✅ 버튼 위치 미세조정(더 우상단) */
   --ctrl-top: 6px;
   --ctrl-right: 6px;
 }
