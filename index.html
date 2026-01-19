@@ -4,12 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arch1v3d</title>
-
-  <!-- 폰트(원하면 바꿔도 됨) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -21,41 +15,37 @@
   <div class="vignette"></div>
 
   <main class="stage">
-    <section class="window-shell" aria-label="window">
+    <section class="window-shell">
       <div class="window-glow"></div>
 
-      <!-- ✅ 버튼: 윈도우 프레임(테두리 영역) 우상단에 고정 -->
-      <div class="win-controls" aria-label="window controls">
-        <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
-        <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
-        <button class="ctrl-btn ctrl-close" type="button" id="openExitPopup" aria-label="close"></button>
-      </div>
-
-      <!-- inner canvas -->
+      <!-- ✅ 연한 하늘색 프레임 안쪽 영역 -->
       <div class="window-placeholder">
-        <div class="titletext">
-          <span class="app-dot">b</span>
-          <span class="app-title">arch1v3d</span>
-          <span class="app-sub">— but not resolved.</span>
+
+        <!-- ✅ 버튼: 반드시 여기 안에 있어야 함 -->
+        <div class="win-controls">
+          <button class="ctrl-btn ctrl-min" aria-label="minimize"></button>
+          <button class="ctrl-btn ctrl-max" aria-label="maximize"></button>
+          <button class="ctrl-btn ctrl-close" id="openExitPopup" aria-label="close"></button>
         </div>
+
+        <!-- 내용 영역 (비워둠) -->
+        <div class="window-body"></div>
       </div>
     </section>
   </main>
 
   <!-- XP popup -->
   <div class="xp-overlay" id="xpOverlay" aria-hidden="true">
-    <div class="xp-window" role="dialog" aria-modal="true" aria-labelledby="xpTitle">
+    <div class="xp-window" role="dialog" aria-modal="true">
       <div class="xp-titlebar">
-        <div class="xp-title" id="xpTitle">System message</div>
-        <button class="xp-x" type="button" id="xpCloseX" aria-label="close">X</button>
+        <div class="xp-title">System message</div>
+        <button class="xp-x" id="xpCloseX">×</button>
       </div>
-
       <div class="xp-body">
         <div class="xp-message">this is not the exit!</div>
-
         <div class="xp-actions">
-          <button class="xp-btn" type="button" id="xpOk">Ok</button>
-          <button class="xp-btn xp-dead" type="button" aria-disabled="true" tabindex="-1">Cancel</button>
+          <button class="xp-btn" id="xpOk">Ok</button>
+          <button class="xp-btn xp-dead" tabindex="-1" aria-disabled="true">Cancel</button>
         </div>
       </div>
     </div>
