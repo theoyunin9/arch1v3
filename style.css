@@ -2,16 +2,18 @@
 html, body { height: 100%; }
 
 :root{
-  /* ✅ 4:3 고정 */
   --stage-ratio: 4 / 3;
 
-  /* 화면 크기에 맞춰 자동으로 줄어들게(가로/세로 둘 다 고려) */
   --max-w: 980px;
   --pad: 48px;
 
-  /* 테두리(연한 하늘색 프레임) 더 두껍게 */
-  --frame-blue: rgba(170, 205, 235, 0.98);
-  --frame-white: rgba(255, 255, 255, 0.72);
+  --frame-blue: rgba(170, 205, 235, 0.98);   /* 바깥 프레임 */
+  --frame-white: rgba(255, 255, 255, 0.72);  /* 안쪽 연한 프레임 */
+
+  --outer-border: 8px;  /* 바깥 프레임 두께 */
+  --inner-frame: 9px;   /* ✅ 안쪽 연한 프레임 두께 (기존 6px보다 더 굵게) */
+
+  --inner-inset: 18px;  /* window-placeholder inset */
 }
 
 body{
@@ -74,12 +76,11 @@ body{
   aspect-ratio: var(--stage-ratio);
   border-radius: 18px;
 
-  /* 바깥 진한 프레임 */
-  border: 8px solid var(--frame-blue);
+  border: var(--outer-border) solid var(--frame-blue);
 
-  /* 🔥 안쪽 연한 프레임만 두껍게 */
+  /* ✅ 안쪽 연한 프레임만 더 두껍게 */
   box-shadow:
-    0 0 0 6px var(--frame-white) inset, /* ← 기존 4px → 6px */
+    0 0 0 var(--inner-frame) var(--frame-white) inset,
     0 26px 80px rgba(0,0,0,0.22),
     0 2px 0 rgba(255,255,255,0.65) inset;
 
@@ -88,6 +89,7 @@ body{
   -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
 }
+
 .window-glow{
   position: absolute; inset: -40%;
   background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.75), rgba(255,255,255,0) 55%);
@@ -98,106 +100,58 @@ body{
 /* inner canvas */
 .window-placeholder{
   position: absolute;
-  inset: 18px;
+  inset: var(--inner-inset);
   border-radius: 14px;
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(150, 180, 210, 0.35);
   box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
+  overflow: hidden;
+
+  /* ✅ 버튼을 이 영역 기준으로 잡을 거라 relative 필요 */
+  position: relative;
 }
 
-/* title text inside */
-.titletext{
-  position: absolute;
-  top: 22px;
-  left: 22px;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  color: rgba(0,0,0,0.85);
-}
+/* ✅ 문구 전부 숨김 (b arch1v3d — but not resolved.) */
+.titletext{ display:none !important; }
+.app-dot, .app-title, .app-sub{ display:none !important; }
 
-.app-dot{
-  display: inline-grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 8px;
-  background: rgba(0,0,0,0.06);
-  font-weight: 700;
-}
-
-.app-title{
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.app-sub{
-  font-size: 14px;
-  opacity: 0.65;
-}
-
-/* ✅ 버튼을 “윈도우 프레임 우상단”에 고정 */
+/* ✅ 버튼을 “연한 하늘색 프레임 안쪽”처럼 보이게:
+   window-placeholder(안쪽 흰 영역) 기준 우상단에 배치하면 딱 그 느낌 남 */
 .win-controls{
   position: absolute;
-  top: 14px;     /* 프레임 안쪽 */
-  right: 16px;   /* 프레임 안쪽 */
+  top: 10px;
+  right: 10px;
   display: flex;
   gap: 10px;
-  z-index: 20;
+  z-index: 30;
 }
 
-/* 버튼 동그라미 */
+/* 버튼 동그라미: 색만 남김(아이콘 제거) */
 .ctrl-btn{
   width: 18px;
   height: 18px;
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,0.28);
   cursor: pointer;
-  position: relative;
   box-shadow:
     0 1px 0 rgba(255,255,255,.7) inset,
     0 1px 2px rgba(0,0,0,.12);
 }
 
-/* 색 */
 .ctrl-min{ background:#ffd047; }
 .ctrl-max{ background:#58d66a; }
 .ctrl-close{ background:#ff5a5a; }
 
 .ctrl-btn:active{ transform: translateY(1px); }
 
-/* ✅ 아이콘 “글자”로 안 넣고, CSS로 그려서 깨짐 방지 */
-.ctrl-min::before{
-  content:"";
-  position:absolute;
-  left: 4px; right: 4px;
-  top: 8px;
-  height: 2px;
-  background: rgba(0,0,0,0.55);
-  border-radius: 2px;
-}
-
-.ctrl-max::before{
-  content:"";
-  position:absolute;
-  left: 5px; top: 5px;
-  width: 8px; height: 8px;
-  border: 2px solid rgba(0,0,0,0.45);
-  border-radius: 2px;
-}
-
+/* ✅ 아이콘 완전 제거 */
+.ctrl-min::before,
+.ctrl-max::before,
 .ctrl-close::before,
 .ctrl-close::after{
-  content:"";
-  position:absolute;
-  left: 4px; top: 4px;
-  width: 10px; height: 2px;
-  background: rgba(0,0,0,0.55);
-  border-radius: 2px;
-  transform-origin: center;
+  content: none !important;
+  display: none !important;
 }
-.ctrl-close::before{ transform: rotate(45deg) translate(2px, 4px); }
-.ctrl-close::after{ transform: rotate(-45deg) translate(2px, -4px); }
 
 /* ===== XP popup ===== */
 .xp-overlay{
@@ -260,9 +214,7 @@ body{
   text-transform: lowercase;
   letter-spacing: .6px;
   line-height: 1.25;
-
-  /* ✅ 픽셀+Y2K 느낌: 폰트 2개 섞어서 */
-  font-family: "Press Start 2P", "VT323", ui-monospace, monospace;
+  font-family: ui-monospace, monospace;
   font-size: 14px;
 }
 
@@ -280,7 +232,7 @@ body{
   box-shadow: 0 2px 0 #ffffff inset;
   cursor: pointer;
   font-size: 14px;
-  font-family: "VT323", ui-monospace, monospace;
+  font-family: ui-monospace, monospace;
 }
 
 .xp-btn:active{ transform: translateY(1px); }
@@ -288,5 +240,5 @@ body{
 .xp-dead{
   opacity: .55;
   cursor: not-allowed;
-  pointer-events: none; /* Cancel 먹통 */
+  pointer-events: none;
 }
