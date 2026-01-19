@@ -70,28 +70,24 @@ body{
 /* ✅ 4:3 윈도우 프레임 */
 .window-shell{
   position: relative;
-
-  /* 가로/세로 둘 다 안 넘치게 */
   width: min(var(--max-w), 92vw, calc((100vh - var(--pad)) * (4/3)));
   aspect-ratio: var(--stage-ratio);
-
   border-radius: 18px;
-  background: rgba(245, 250, 255, 0.55);
 
-  /* ✅ 연한 하늘색 프레임(두껍게) */
+  /* 바깥 진한 프레임 */
   border: 8px solid var(--frame-blue);
 
-  /* ✅ 안쪽 흰 테두리(이중 프레임 느낌) */
+  /* 🔥 안쪽 연한 프레임만 두껍게 */
   box-shadow:
-    0 0 0 4px var(--frame-white) inset,
+    0 0 0 6px var(--frame-white) inset, /* ← 기존 4px → 6px */
     0 26px 80px rgba(0,0,0,0.22),
     0 2px 0 rgba(255,255,255,0.65) inset;
 
+  background: rgba(245, 250, 255, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
 }
-
 .window-glow{
   position: absolute; inset: -40%;
   background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.75), rgba(255,255,255,0) 55%);
