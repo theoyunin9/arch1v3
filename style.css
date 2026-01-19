@@ -48,7 +48,7 @@ body {
 /* === STAGE: fixed ratio regardless of device === */
 :root{
   --stage-w: min(92vw, 980px);
-  --stage-ratio: 4 / 3; /* ✅ 여기! 4:3 고정 */
+  --stage-ratio: 4 / 3;
 }
 
 .stage{
@@ -251,4 +251,24 @@ body {
   opacity:.55;
   cursor:not-allowed;
   pointer-events:none; /* Cancel 먹통 */
+}
+
+/* === move buttons to top-right corner inside the window === */
+.titlebar{
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.win-controls{
+  position: absolute;
+  top: 10px;     /* 살짝 아래 */
+  right: 12px;   /* 우측 모서리 */
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
