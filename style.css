@@ -85,9 +85,8 @@ body{
   border: var(--outer) solid var(--outer-color);
 
   /* ✅ 연한 하늘색 프레임(두껍게) */
-  box-shadow:
-    0 0 0 var(--frame) var(--frame-color) inset,
-    0 26px 80px rgba(0,0,0,0.22);
+box-shadow:
+  0 26px 80px rgba(0,0,0,0.22);
 
   background: rgba(245,250,255,0.18);
   backdrop-filter: blur(10px);
