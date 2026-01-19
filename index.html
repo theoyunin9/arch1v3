@@ -1,16 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arch1v3d</title>
-
-  <!-- 픽셀/레트로 느낌 폰트(팝업에 사용) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css?v=7" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -22,18 +16,22 @@
 
   <!-- STAGE -->
   <main class="stage">
-    <section class="window-shell" aria-label="window placeholder">
+    <section class="window-shell" aria-label="window">
       <div class="window-glow"></div>
 
-      <!-- ✅ 버튼: 연한 하늘색 프레임 “위(띠 위)”에 얹힘 -->
+      <!-- ✅ buttons live on the frame (border area) -->
       <div class="win-controls" aria-label="window controls">
         <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
         <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
         <button class="ctrl-btn ctrl-close" type="button" id="openExitPopup" aria-label="close"></button>
       </div>
 
-      <!-- inner canvas -->
-      <div class="window-placeholder" aria-hidden="true"></div>
+      <!-- inner canvas (NO white ring around it) -->
+      <div class="window-inner" aria-label="content area">
+        <!-- 위쪽 얇은 라인(원하면 지워도 됨) -->
+        <div class="top-strip"></div>
+        <div class="content"></div>
+      </div>
     </section>
   </main>
 
@@ -47,7 +45,6 @@
 
       <div class="xp-body">
         <div class="xp-message">this is not the exit!</div>
-
         <div class="xp-actions">
           <button class="xp-btn" type="button" id="xpOk">Ok</button>
           <button class="xp-btn xp-dead" type="button" aria-disabled="true" tabindex="-1">Cancel</button>
@@ -56,6 +53,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=7"></script>
+  <script src="app.js"></script>
 </body>
 </html>
