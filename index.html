@@ -1,118 +1,12 @@
-<!-- HTML -->
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ARCHIV3D</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
-  <div class="bg-scribble"></div>
-
-  <main class="stage">
-    <section class="window" role="application" aria-label="ARCHIV3D window">
-      <!-- title bar -->
-      <header class="titlebar">
-        <div class="title">
-          <span class="brand">ARCHIV3D</span>
-          <span class="sub">- but not resolved</span>
-        </div>
-
-        <div class="top-right">
-          <div class="status-pill">まだ loading 中……</div>
-
-          <div class="traffic">
-            <button class="dot red"   data-modal="red"   aria-label="red alert"></button>
-            <button class="dot yellow" data-modal="yellow" aria-label="yellow alert"></button>
-            <button class="dot green"  data-modal="green"  aria-label="green alert"></button>
-          </div>
-        </div>
-      </header>
-
-      <!-- content -->
-      <div class="content">
-        <section class="panel left">
-          <div class="tabs">
-            <button class="tab is-active" data-tab="calendar">CALENDER</button>
-            <button class="tab" data-tab="memo">MEMO</button>
-          </div>
-
-          <div class="left-top">
-            <div class="box big">
-              <div class="box-title">일정정리 / 메모 / 링크</div>
-              <div class="box-body faint">
-                error404; error404; error404; error404;
-              </div>
-            </div>
-
-            <div class="box small">
-              <div class="box-title">controls</div>
-              <div class="box-body faint">▶︎ ◼︎ ◀︎</div>
-            </div>
-          </div>
-
-          <div class="list">
-            <button class="link">Click here to literature</button>
-            <button class="link">Click here to aesthetics</button>
-            <button class="link">Click here to memory</button>
-            <button class="link">Click here to sequence</button>
-          </div>
-        </section>
-
-        <aside class="panel right">
-          <div class="box">
-            <div class="box-title">Quick?</div>
-            <div class="btnrow">
-              <button class="mini">열림</button>
-              <button class="mini">닫힘</button>
-              <button class="mini">통제중</button>
-            </div>
-            <div class="note faint">사건번호: ████</div>
-          </div>
-
-          <div class="box">
-            <div class="box-title">log</div>
-            <div class="box-body faint">
-              0ツヅキアマデ繋ガラナイ…<br/>
-              なんで？
-            </div>
-          </div>
-        </aside>
-      </div>
-
-      <!-- bottom -->
-      <footer class="bottombar">
-        <div class="dots">
-          <span></span><span></span><span></span><span></span>
-        </div>
-
-        <div class="where">You are <u>safe</u> here…</div>
-
-        <form class="search" onsubmit="return false;">
-          <input class="search-input" placeholder="검색창" />
-          <button class="search-btn" aria-label="search">🔎</button>
-        </form>
-      </footer>
-    </section>
-  </main>
-
-  <!-- modal -->
-  <div class="overlay" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-head">
-        <div id="modalTitle" class="modal-title">ALERT</div>
-        <button class="modal-x" aria-label="close">x</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-actions">
-        <button class="cancel">Cancel</button>
-        <button class="ok">OK</button>
-      </div>
-    </div>
-  </div>
+  <!-- 지금은 배경만. 다음 단계에서 window(큰 창) 얹을 거임 -->
 </body>
 </html>
