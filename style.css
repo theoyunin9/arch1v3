@@ -4,12 +4,12 @@ html, body { height: 100%; }
 :root{
   --ratio: 4 / 3;
 
-  /* ✅ 제일 바깥 진한 파랑 = 얇게 (너가 말한 1/4 수준) */
-  --outer: 2px;
-  --outer-color: rgba(120, 160, 200, 0.45);
+  /* ✅ 제일 바깥 진한 파랑: 더 얇게 */
+  --outer: 1px;
+  --outer-color: rgba(90, 135, 175, 0.38);
 
-  /* ✅ 연한 하늘색 프레임(= 네 빨간 표시 부분) = 두껍게 */
-  --frame: 44px;
+  /* ✅ 연한 하늘 프레임: 두껍게 유지 */
+  --frame: 46px;
   --frame-color: rgba(170, 205, 235, 0.95);
 
   --radius: 22px;
@@ -17,23 +17,23 @@ html, body { height: 100%; }
   /* 프레임 안쪽에서 흰 화면까지 여백 */
   --gap: 10px;
 
-  /* 버튼 크기 */
+  /* 버튼 */
   --ctrl: 18px;
   --ctrl-gap: 10px;
 
-  /* 버튼을 “더 우상단”으로 밀기 */
-  --ctrl-top: 8px;   /* 프레임 안에서 위 */
-  --ctrl-right: 8px; /* 프레임 안에서 오른쪽 */
+  /* ✅ 버튼 위치 미세조정(더 우상단) */
+  --ctrl-top: 6px;
+  --ctrl-right: 6px;
 }
 
-body {
+body{
   margin: 0;
   overflow: hidden;
   background: #dbeeff;
   font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
-/* background */
+/* === BACKGROUND === */
 .bg{
   position: fixed; inset: 0;
   background:
@@ -68,7 +68,7 @@ body {
   mix-blend-mode: overlay;
 }
 
-/* stage */
+/* === STAGE === */
 .stage{
   position: fixed; inset: 0;
   display: grid;
@@ -76,7 +76,7 @@ body {
   padding: 24px;
 }
 
-/* ✅ 창 프레임 */
+/* === WINDOW FRAME === */
 .window-shell{
   position: relative;
   width: min(980px, 92vw, calc((100vh - 48px) * (4/3)));
@@ -86,13 +86,12 @@ body {
   /* 바깥 얇은 진파랑 */
   border: var(--outer) solid var(--outer-color);
 
-  /* ✅ “파란 동그라미(흰 테두리)” 같은 거 절대 안 넣음 */
-  /* ✅ 연한 하늘색 프레임(빨강 표시 부분)만 두껍게 */
+  /* ✅ 연한 하늘색 프레임(두껍게) */
   box-shadow:
     0 0 0 var(--frame) var(--frame-color) inset,
     0 26px 80px rgba(0,0,0,0.22);
 
-  background: rgba(245,250,255,0.2);
+  background: rgba(245,250,255,0.18);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
@@ -100,44 +99,35 @@ body {
 
 .window-glow{
   position: absolute; inset: -40%;
-  background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.75), rgba(255,255,255,0) 55%);
-  opacity: 0.85;
+  background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.6), rgba(255,255,255,0) 55%);
+  opacity: 0.65;
   pointer-events: none;
 }
 
-/* ✅ 프레임 안쪽 캔버스 */
+/* ✅ 메인 화면: 완전 쌩화이트 */
 .window-placeholder{
   position: absolute;
   inset: calc(var(--outer) + var(--frame) + var(--gap));
   border-radius: 16px;
-
-  /* ✅ 가운데 메인 화면 “쌩화이트” */
   background: #ffffff !important;
-
-  border: 1px solid rgba(150,180,210,0.20);
+  border: 1px solid rgba(150,180,210,0.18);
   overflow: hidden;
 }
 
-/* ✅ 타이틀 문구 싹 숨김 */
-.titlebar,
-.title-left,
-.app-dot,
-.app-title,
-.app-sub{
-  display: none !important;
+.window-body{
+  width: 100%;
+  height: 100%;
+  background: #ffffff !important;
 }
 
-/* ✅ 버튼은 “연한 하늘색 프레임” 위로 */
+/* ✅ 버튼: 프레임 위로 + 더 우상단 */
 .win-controls{
-  position: absolute !important;
-
-  /* 프레임 영역 안쪽에 박히게 */
-  top:  calc(var(--outer) + var(--ctrl-top)) !important;
-  right: calc(var(--outer) + var(--ctrl-right)) !important;
-
-  display: flex !important;
-  gap: var(--ctrl-gap) !important;
-  z-index: 999 !important;
+  position: absolute;
+  top:  calc(var(--outer) + var(--ctrl-top));
+  right: calc(var(--outer) + var(--ctrl-right));
+  display: flex;
+  gap: var(--ctrl-gap);
+  z-index: 999;
 }
 
 .ctrl-btn{
@@ -149,23 +139,23 @@ body {
   box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 1px 2px rgba(0,0,0,.12);
 }
 
-/* ✅ 아이콘/글자 없음: 색만 */
+/* 색만(아이콘 없음) */
 .ctrl-min{ background:#ffd047; }
 .ctrl-max{ background:#58d66a; }
 .ctrl-close{ background:#ff5a5a; }
 
 .ctrl-btn::before,
-.ctrl-btn::after{ content:none !important; }
+.ctrl-btn::after{ content: none !important; }
 
 .ctrl-btn:active{ transform: translateY(1px); }
 
 /* 모바일 */
 @media (max-width:520px){
   :root{
-    --frame: 36px;
+    --frame: 38px;
     --ctrl: 16px;
     --ctrl-gap: 9px;
-    --ctrl-top: 7px;
-    --ctrl-right: 7px;
+    --ctrl-top: 5px;
+    --ctrl-right: 5px;
   }
 }
