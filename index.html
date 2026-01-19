@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arch1v3d</title>
-  <link rel="stylesheet" href="style.css?v=20260119_2">
-</head>
 
+  <!-- ✅ 캐시 무력화용 v=... 꼭 유지 -->
+  <link rel="stylesheet" href="style.css?v=20260119_2" />
+</head>
 <body>
   <div class="bg"></div>
   <div class="scanlines"></div>
@@ -17,18 +18,15 @@
     <section class="window-shell" aria-label="window">
       <div class="window-glow"></div>
 
-      <!-- 버튼 -->
+      <!-- ✅ controls (frame 영역에 박힘) -->
       <div class="win-controls" aria-label="window controls">
         <button class="ctrl-btn ctrl-min" type="button" aria-label="minimize"></button>
         <button class="ctrl-btn ctrl-max" type="button" aria-label="maximize"></button>
         <button class="ctrl-btn ctrl-close" type="button" id="openExitPopup" aria-label="close"></button>
       </div>
 
-      <!-- 안쪽 -->
-      <div class="window-inner" aria-label="content area">
-        <div class="top-strip"></div>
-        <div class="content"></div>
-      </div>
+      <!-- ✅ inner -->
+      <div class="content"></div>
     </section>
   </main>
 
@@ -50,6 +48,6 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20260119_2"></script>
 </body>
 </html>
