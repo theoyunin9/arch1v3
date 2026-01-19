@@ -1,10 +1,9 @@
-/* ===== 1단계: 유리 느낌 배경 ===== */
+/* ===== 1단계: 유리 느낌 배경 (조정 버전) ===== */
 
 :root{
-  /* 기준 컬러 (누나가 준 색) */
-  --glass-base: #D5E3FF;
+  /* 기준 컬러 (누나가 준 색 기반, 체감상 조금 더 진함) */
+  --glass-base: #c9dbff;
 
-  /* 공통 */
   --ink: #12121a;
 }
 
@@ -16,18 +15,19 @@ body{
   color: var(--ink);
   overflow-x: hidden;
 
-  /* 💡 핵심: 유리 느낌 그라데이션 */
+  /* 💎 유리 느낌 그라데이션 (하단 강조) */
   background:
     linear-gradient(
       to bottom,
       #ffffff 0%,
-      #ffffff 45%,
-      #eef3ff 65%,
+      #ffffff 38%,
+      #edf2ff 55%,
+      #dfe9ff 72%,
       var(--glass-base) 100%
     );
 }
 
-/* ===== 유리 하이라이트 레이어 ===== */
+/* ===== 유리 하이라이트 + 반투명 레이어 ===== */
 body::before{
   content:"";
   position: fixed;
@@ -35,17 +35,19 @@ body::before{
   pointer-events: none;
 
   background:
+    /* 메인 유리 빛 */
     radial-gradient(
-      1200px 300px at 50% 85%,
-      rgba(255,255,255,0.55),
-      transparent 70%
+      1100px 320px at 50% 88%,
+      rgba(255,255,255,0.65),
+      transparent 72%
     ),
+    /* 보조 하이라이트 */
     radial-gradient(
-      800px 200px at 20% 90%,
-      rgba(255,255,255,0.35),
+      700px 220px at 18% 92%,
+      rgba(255,255,255,0.45),
       transparent 75%
     );
 
-  backdrop-filter: blur(2px);
-  opacity: 0.9;
+  backdrop-filter: blur(4px);
+  opacity: 0.95;
 }
