@@ -97,7 +97,7 @@ body{
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* ===== 🔴 유리 원형 버튼 (레퍼런스 느낌: 얇은 곡선 하이라이트 + 우하단 얇은 명암) ===== */
+/* ===== 🔴 NEW: 유리/젤리 버튼 (ref 느낌, 핑크 #FF99A6) ===== */
 .glass-btn{
   position: absolute;
   top: 24px;
@@ -108,76 +108,66 @@ body{
   padding: 0;
 
   border-radius: 50%;
-  border: 1.2px solid rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.75);
 
-  /* 색감: 기존 레드 유지 + 조금 연하게 + 반투명 유리감 */
+  /* 기본 바디: 좌상단 -> 우하단 은은하게 진해짐 (중간에 base 톤) */
   background:
-    radial-gradient(
-      circle at 30% 30%,
-      rgba(255,255,255,0.55) 0%,
-      rgba(255,255,255,0.14) 28%,
-      rgba(255,90,120,0.42) 55%,
-      rgba(220,60,90,0.62) 100%
+    linear-gradient(135deg,
+      rgba(255,170,185,0.85) 0%,
+      rgba(255,153,166,0.78) 48%,
+      rgba(235,105,125,0.88) 100%
     );
 
+  /* 유리 느낌 */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
+  /* 볼륨감 + 살짝 글로우 */
   box-shadow:
-    0 10px 22px rgba(180,40,70,0.28),
-    inset 0 1px 2px rgba(255,255,255,0.55);
+    0 14px 30px rgba(230,90,115,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.80),
+    inset 0 -10px 18px rgba(160,20,45,0.20);
 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ✨ 좌상단 “얇은 곡선” 하이라이트 (면 하이라이트 X, 라인 느낌) */
+/* 위쪽 “링 하이라이트” (2짤처럼 얇게) */
 .glass-btn::before{
   content:"";
   position:absolute;
-  inset: 4px;
+  inset: 3px;              /* 링 두께 얇게 */
   border-radius: 50%;
   pointer-events: none;
 
-  /* 얇은 호(arc)만 보이게 */
+  /* 위쪽만 살짝 밝고, 아래쪽은 거의 없음 */
   background:
-    conic-gradient(
-      from 210deg,
-      rgba(255,255,255,0.0) 0deg,
-      rgba(255,255,255,0.0) 18deg,
-      rgba(255,255,255,0.85) 26deg,
-      rgba(255,255,255,0.0) 44deg,
-      rgba(255,255,255,0.0) 360deg
+    conic-gradient(from 210deg,
+      rgba(255,255,255,0.00) 0deg,
+      rgba(255,255,255,0.55) 40deg,
+      rgba(255,255,255,0.12) 95deg,
+      rgba(255,255,255,0.00) 180deg,
+      rgba(255,255,255,0.00) 360deg
     );
 
-  /* 곡선 두께 느낌: 살짝 블러 + 마스크로 링 형태 */
-  filter: blur(0.25px);
-  -webkit-mask: radial-gradient(circle, transparent 62%, #000 66%, #000 70%, transparent 74%);
-          mask: radial-gradient(circle, transparent 62%, #000 66%, #000 70%, transparent 74%);
-  opacity: 0.9;
+  filter: blur(0.2px);
+  opacity: 0.85;
 }
 
-/* 🌘 우하단 “얇은 곡선” 명암 */
+/* 아래쪽 곡선 명암 (2짤처럼 바닥 볼륨) */
 .glass-btn::after{
   content:"";
   position:absolute;
-  inset: 4px;
+  inset: 0;
   border-radius: 50%;
   pointer-events: none;
 
   background:
-    conic-gradient(
-      from 20deg,
-      rgba(0,0,0,0.0) 0deg,
-      rgba(0,0,0,0.0) 210deg,
-      rgba(0,0,0,0.28) 240deg,
-      rgba(0,0,0,0.0) 290deg,
-      rgba(0,0,0,0.0) 360deg
+    radial-gradient(120% 120% at 75% 80%,
+      rgba(110,10,30,0.28) 0%,
+      rgba(110,10,30,0.14) 28%,
+      rgba(110,10,30,0.00) 55%
     );
-
-  filter: blur(0.35px);
-  -webkit-mask: radial-gradient(circle, transparent 60%, #000 66%, #000 72%, transparent 78%);
-          mask: radial-gradient(circle, transparent 60%, #000 66%, #000 72%, transparent 78%);
   opacity: 0.55;
 }
 
@@ -185,13 +175,15 @@ body{
   transform: translateY(1px) scale(0.97);
 }
 
-/* ===== ❌ X 마크 (47% 유지 + 흰색) ===== */
+/* ===== ❌ X 마크 (47% 유지 / 흰색 두껍고 각진) ===== */
 .x-mark{
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
+
+  /* 그대로 유지 */
   transform: translate(-47%, -50%);
 }
 
@@ -201,14 +193,17 @@ body{
   position:absolute;
   left: 50%;
   top: 50%;
-  width: 14px;
-  height: 1.8px;
-  background: rgba(255,255,255,0.92);
-  border-radius: 2px;
 
-  /* 흰색이 배경에 묻히면 살짝 또렷하게 */
-  box-shadow: 0 0 2px rgba(0,0,0,0.12);
+  width: 18px;
+  height: 3px;                 /* 더 두껍게 */
+  background: rgba(255,255,255,0.92);
+  border-radius: 1px;          /* 둥글게 말고 “각” 느낌 */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08);
 }
 
-.x-mark::before{ transform: translate(-50%,-50%) rotate(45deg); }
-.x-mark::after { transform: translate(-50%,-50%) rotate(-45deg); }
+.x-mark::before{
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+.x-mark::after{
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
