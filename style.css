@@ -15,7 +15,10 @@ body{
   background: #fff;
 }
 
-/* 배경을 고정 레이어로 */
+/* =========================
+   배경
+   ========================= */
+
 .bg{
   position: fixed;
   inset: 0;
@@ -54,7 +57,10 @@ body{
   opacity: 0.95;
 }
 
-/* 중앙 고정 */
+/* =========================
+   중앙 스테이지
+   ========================= */
+
 .stage{
   position: fixed;
   inset: 0;
@@ -66,13 +72,16 @@ body{
   height: 100svh;
 }
 
-/* 메인 창 */
+/* =========================
+   메인 창
+   ========================= */
+
 .main-window{
   aspect-ratio: 4 / 3;
   width: min(92vw, calc(78svh * (4/3)));
   max-width: 980px;
 
-  position: relative; /* ✅ 버튼을 창 기준으로 고정하려면 필수 */
+  position: relative; /* 버튼 기준 */
 
   border-radius: 28px;
 
@@ -87,59 +96,73 @@ body{
 }
 
 /* =========================
-   ✅ 유리 동그라미 버튼
+   🔴 유리 원형 버튼 (최종)
    ========================= */
 
-/* 누나 스샷 느낌: 작고 동그랗고 유리감 + 살짝 핑크 */
 .glass-btn{
-  /* ✅ 위치/크기 고정 */
   position: absolute;
-  top: 28px;
-  right: 28px;
+  top: 24px;
+  right: 24px;
 
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   padding: 0;
 
-  border-radius: 999px; /* 완전 원 */
-  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.7);
 
+  /* 🔴 찐한 레드 + 깊이 */
   background:
-    radial-gradient(circle at 30% 25%,
-      rgba(255,255,255,0.95),
-      rgba(255,255,255,0.35) 45%,
-      rgba(255,160,190,0.35) 100%
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255,255,255,0.75),
+      rgba(255,255,255,0.18) 38%,
+      rgba(255,90,120,0.55) 62%,
+      rgba(220,60,90,0.75) 100%
     );
 
-  box-shadow:
-    0 10px 22px rgba(40,60,120,0.16),
-    inset 0 1px 0 rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 12px 26px rgba(180,40,70,0.35),
+    inset 0 1px 2px rgba(255,255,255,0.7);
 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 눌렀을 때 살짝 들어가게 */
+/* 🔮 유리 표면 하이라이트 */
+.glass-btn::before{
+  content:"";
+  position:absolute;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+  height: 45%;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.9),
+    rgba(255,255,255,0.15)
+  );
+
+  pointer-events: none;
+}
+
+/* 눌림 효과 */
 .glass-btn:active{
-  transform: translateY(1px) scale(0.98);
+  transform: translateY(1px) scale(0.97);
 }
 
-/* 키보드 포커스(나중에 PC용) */
-.glass-btn:focus{
-  outline: none;
-}
-.glass-btn:focus-visible{
-  outline: 2px solid rgba(120,160,255,0.35);
-  outline-offset: 3px;
-}
+/* =========================
+   X 마크
+   ========================= */
 
-/* X 표시: CSS로 그리는 깔끔한 X */
 .x-mark{
   position: relative;
-  display: block;
   width: 14px;
   height: 14px;
   margin: auto;
@@ -148,34 +171,19 @@ body{
 .x-mark::before,
 .x-mark::after{
   content:"";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 14px;
-  height: 2px;
-  background: rgba(120, 60, 80, 0.55); /* ✅ 너무 검지 않게, 핑크톤 */
-  border-radius: 999px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:14px;
+  height:2px;
+  background: rgba(120,20,30,0.85);
+  border-radius: 2px;
   transform-origin: center;
 }
 
 .x-mark::before{
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%,-50%) rotate(45deg);
 }
 .x-mark::after{
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-/* ✅ 디버그: 버튼이 적용되고 있는지 무조건 보이게 */
-.glass-btn{
-  position: absolute !important;
-  top: 24px !important;
-  right: 24px !important;
-
-  width: 36px !important;
-  height: 36px !important;
-
-  border-radius: 999px !important;
-  background: rgba(255, 80, 140, 0.35) !important; /* 일부러 눈에 띄게 */
-  border: 2px solid rgba(255,255,255,0.9) !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+  transform: translate(-50%,-50%) rotate(-45deg);
 }
