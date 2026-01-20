@@ -496,8 +496,8 @@ body{
   content: "";
   position: absolute;
   right: 0;
-  top: 2px;
-  bottom: 2px;
+  top: 1px;
+  bottom: 1px;
   width: 1px;
   background: rgba(120,120,120,0.35);
 }
