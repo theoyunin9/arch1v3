@@ -15,10 +15,7 @@ body{
   background: #fff;
 }
 
-/* =========================
-   배경
-   ========================= */
-
+/* 배경 고정 레이어 */
 .bg{
   position: fixed;
   inset: 0;
@@ -57,10 +54,7 @@ body{
   opacity: 0.95;
 }
 
-/* =========================
-   중앙 스테이지
-   ========================= */
-
+/* 중앙 고정 */
 .stage{
   position: fixed;
   inset: 0;
@@ -72,16 +66,13 @@ body{
   height: 100svh;
 }
 
-/* =========================
-   메인 창
-   ========================= */
-
+/* 메인 창 */
 .main-window{
   aspect-ratio: 4 / 3;
   width: min(92vw, calc(78svh * (4/3)));
   max-width: 980px;
 
-  position: relative; /* 버튼 기준 */
+  position: relative; /* ✅ 버튼 위치 기준 */
 
   border-radius: 28px;
 
@@ -95,10 +86,7 @@ body{
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* =========================
-   🔴 유리 원형 버튼 (최종)
-   ========================= */
-
+/* 🔴 유리 원형 버튼 (찐한 레드 + 표면 유리감) */
 .glass-btn{
   position: absolute;
   top: 24px;
@@ -111,7 +99,6 @@ body{
   border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,0.7);
 
-  /* 🔴 찐한 레드 + 깊이 */
   background:
     radial-gradient(
       circle at 30% 30%,
@@ -132,7 +119,7 @@ body{
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 🔮 유리 표면 하이라이트 */
+/* 유리 표면 하이라이트 */
 .glass-btn::before{
   content:"";
   position:absolute;
@@ -140,7 +127,6 @@ body{
   right: 4px;
   top: 4px;
   height: 45%;
-
   border-radius: 999px;
 
   background: linear-gradient(
@@ -152,20 +138,18 @@ body{
   pointer-events: none;
 }
 
-/* 눌림 효과 */
 .glass-btn:active{
   transform: translateY(1px) scale(0.97);
 }
 
-/* =========================
-   X 마크
-   ========================= */
-
+/* X 마크 */
 .x-mark{
-  position: relative;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+
   width: 14px;
   height: 14px;
-  margin: auto;
 }
 
 .x-mark::before,
