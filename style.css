@@ -97,7 +97,7 @@ body{
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* ===== 🔴 Close 버튼 (NEW, 레퍼런스 기준) ===== */
+/* ===== 🔴 유리 원형 버튼 (iOS 얼룩 방지 최종) ===== */
 .glass-btn{
   position: absolute;
   top: 24px;
@@ -108,68 +108,79 @@ body{
   padding: 0;
 
   border-radius: 50%;
-  border: 1.2px solid rgba(255,255,255,0.55);
 
-  /* 🔴 기본색 #FF99A6
-     좌상단 → 우하단 은은한 그라데이션 */
+  /* ✅ iOS 얼룩 방지 핵심 */
+  overflow: hidden;
+  isolation: isolate;
+
+  /* 테두리는 깔끔하게 */
+  border: 1.5px solid rgba(255,255,255,1);
+
+  /* 기본색: #FF99A6 / 좌상단 → 우하단 은은하게 진해짐 */
   background: linear-gradient(
     135deg,
-    #ffd1d8 0%,
-    #ff99a6 45%,
-    #f06a7f 100%
+    rgba(255, 215, 225, 0.85) 0%,
+    rgba(255, 153, 166, 0.78) 52%,
+    rgba(222, 92, 115, 0.88) 100%
   );
 
+  /* 블러는 최소 (과하면 iOS에서 기름때 생김) */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  /* 아이콘처럼 단단한 깊이감 */
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.6),
-    inset 0 -2px 4px rgba(0,0,0,0.15),
-    0 10px 22px rgba(200,60,80,0.35);
+    0 12px 26px rgba(180,40,70,0.28),
+    inset 0 2px 0 rgba(255,255,255,0.55),
+    inset 0 -3px 10px rgba(0,0,0,0.10);
 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-}
-
-/* ✨ 좌상단 얇은 곡선 하이라이트 */
-.glass-btn::before{
-  content:"";
-  position:absolute;
-  inset: 4px;
-  border-radius: 50%;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at top left,
-      rgba(255,255,255,0.85),
-      rgba(255,255,255,0.35) 30%,
-      transparent 55%
-    );
-
-  opacity: 0.9;
-}
-
-/* 🌘 우하단 곡선 명암 */
-.glass-btn::after{
-  content:"";
-  position:absolute;
-  inset: 3px;
-  border-radius: 50%;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at bottom right,
-      rgba(0,0,0,0.35),
-      transparent 60%
-    );
-
-  opacity: 0.35;
 }
 
 .glass-btn:active{
   transform: translateY(1px) scale(0.97);
 }
 
-/* ===== ❌ X 마크 (두껍고 네모난 흰색) ===== */
+/* ✨ 좌상단 얇은 곡선 하이라이트 (테두리 밖으로 안 새게 inset) */
+.glass-btn::before{
+  content:"";
+  position:absolute;
+  inset: 3px;              /* ✅ 테두리 안쪽만 */
+  border-radius: 50%;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      120% 120% at 18% 18%,
+      rgba(255,255,255,0.75) 0%,
+      rgba(255,255,255,0.35) 18%,
+      rgba(255,255,255,0.0) 38%
+    );
+
+  opacity: 0.95;
+}
+
+/* 🌘 우하단 얇은 곡선 명암 (테두리 안쪽만) */
+.glass-btn::after{
+  content:"";
+  position:absolute;
+  inset: 3px;              /* ✅ 테두리 안쪽만 */
+  border-radius: 50%;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      140% 140% at 82% 88%,
+      rgba(0,0,0,0.28) 0%,
+      rgba(0,0,0,0.14) 16%,
+      rgba(0,0,0,0.0) 40%
+    );
+
+  opacity: 0.55;
+}
+
+/* ===== ❌ X 마크 (47% 유지 / 더 두껍고 네모나게 / 흰색) ===== */
 .x-mark{
   position: absolute;
   left: 50%;
@@ -177,7 +188,7 @@ body{
   width: 16px;
   height: 16px;
 
-  /* 요청대로 그대로 */
+  /* ✅ 그대로 유지 */
   transform: translate(-47%, -50%);
 }
 
@@ -187,10 +198,16 @@ body{
   position:absolute;
   left: 50%;
   top: 50%;
-  width: 16px;
-  height: 3px;          /* ✔ 두껍게 */
-  background: #ffffff; /* ✔ 흰색 */
-  border-radius: 1px;  /* ✔ 네모 느낌 */
+
+  width: 18px;      /* 조금 더 큼 */
+  height: 3.2px;    /* ✅ 더 두껍게 */
+  background: rgba(255,255,255,0.98);
+  border-radius: 1px;  /* ✅ 둥글지 말고 네모 느낌 */
+
+  /* 살짝 유리 느낌 */
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.25),
+    0 2px 8px rgba(0,0,0,0.10);
 }
 
 .x-mark::before{
