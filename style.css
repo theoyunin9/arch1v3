@@ -4,13 +4,17 @@
   --glass-base: #c9dbff;
   --ink: #12121a;
 
-  /* ✅ 투명도 컨트롤 */
-  --base-alpha: 0.42;     /* 기존 메인창: 더 투명하게 */
-  --overlay-alpha: 0.55;  /* 새로 얹는 창: 지금 느낌(기존 정도) */
+  /* ✅ 투명도: 바닥은 더 투명 / 위창은 지금 정도 */
+  --base-alpha: 0.38;      /* 바닥창: 조금 더 투명하게 */
+  --overlay-alpha: 0.55;   /* 위창: 현재 보이는 정도 투명도 */
 
   /* ✅ 여백 비율 (상:좌:우:하 = 1.5:1:1:1) */
-  --pad: clamp(16px, 2.2vw, 22px);
-  --pad-top: calc(var(--pad) * 1.5);
+  --gap: clamp(18px, 2.2vw, 26px);
+  --gap-top: calc(var(--gap) * 1.5);
+
+  /* 둥글기 */
+  --r-base: 28px;
+  --r-overlay: 24px;
 }
 
 *{ box-sizing: border-box; }
@@ -34,6 +38,7 @@ body{
     );
 }
 
+/* 유리 하이라이트 */
 body::before{
   content:"";
   position: fixed;
@@ -57,61 +62,61 @@ body::before{
   opacity: 0.9;
 }
 
-/* ===== 2단계: 중앙 창들(베이스 + 오버레이) ===== */
-
+/* 화면 중앙 고정 */
 .stage{
   height: 100svh;
   height: 100dvh;
   height: 100vh;
+
   display: grid;
   place-items: center;
   padding: 0;
 }
 
-/* 바닥 메인 창 */
-.main-window{
+/* ===== 2단계: 바닥 메인 창(더 투명) ===== */
+.base-window{
   aspect-ratio: 4 / 3;
   width: min(92vw, calc(78svh * (4/3)));
   max-width: 980px;
 
-  position: relative; /* ✅ 위에 창 얹으려고 필요 */
-  border-radius: 28px;
+  position: relative;
+  z-index: 1;
 
-  /* ✅ 베이스: 더 투명 */
-  background: rgba(255, 255, 255, var(--base-alpha));
+  border-radius: var(--r-base);
+
+  background: rgba(255,255,255, var(--base-alpha));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  border: 1.5px solid rgba(255,255,255,0.55);
+  border: 1.3px solid rgba(255,255,255,0.52);
   box-shadow:
-    0 20px 40px rgba(40,60,120,0.10),
+    0 22px 50px rgba(40,60,120,0.10),
     inset 0 1px 0 rgba(255,255,255,0.55);
-
-  /* ✅ 여백 비율: 상단만 1.5배 */
-  padding: var(--pad-top) var(--pad) var(--pad) var(--pad);
 }
 
-/* 위에 얹는 새 창 */
+/* ===== 3단계: 위에 얹는 새 창(검은선 영역 느낌) ===== */
 .overlay-window{
   position: absolute;
+  z-index: 2;
 
-  /* ✅ 베이스 안에서 여백을 남기고 “얹힌 창”처럼 */
-  top: var(--pad-top);
-  left: var(--pad);
-  right: var(--pad);
-  bottom: var(--pad);
+  /* ✅ “검은선으로 그린 만큼” 안쪽 여백
+     상단만 1.5배, 좌/우/하단 동일 */
+  top: var(--gap-top);
+  left: var(--gap);
+  right: var(--gap);
+  bottom: var(--gap);
 
-  border-radius: 22px;
+  border-radius: var(--r-overlay);
 
-  /* ✅ 오버레이: 지금 정도 투명도 */
-  background: rgba(255, 255, 255, var(--overlay-alpha));
+  /* ✅ 위창은 덜 투명(지금 정도) */
+  background: rgba(255,255,255, var(--overlay-alpha));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
-  /* ✅ 얹힌 느낌(테두리/그림자 조금 더 강하게) */
-  border: 1.6px solid rgba(255,255,255,0.70);
+  /* ✅ 얹힌 느낌: 테두리/그림자 더 강하게 */
+  border: 1.6px solid rgba(255,255,255,0.72);
   box-shadow:
-    0 26px 60px rgba(40,60,120,0.16),
-    0 8px 18px rgba(40,60,120,0.10),
+    0 30px 70px rgba(40,60,120,0.16),
+    0 10px 22px rgba(40,60,120,0.10),
     inset 0 1px 0 rgba(255,255,255,0.70);
 }
