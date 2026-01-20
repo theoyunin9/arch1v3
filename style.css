@@ -509,7 +509,7 @@ body{
   bottom: 16px;
 
   /* 👇 핵심: 위치 + 크기 동시 보정 */
-  transform: translateX(-50%) scale(0.25);
+  transform: translateX(-50%) scale(0.35);
   transform-origin: center bottom;
 
   width: 43%;
