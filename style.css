@@ -509,8 +509,8 @@ body{
   bottom: 16px;
   transform: translateX(-50%);
 
-  width: 62%;
-  max-width: 520px;
+  width: 43%;              /* ✅ 기존 62% → 약 70% 수준으로 축소 */
+  max-width: 360px;        /* ✅ 같이 줄여서 균형 맞춤 */
   height: 46px;
 
   display: flex;
@@ -524,13 +524,15 @@ body{
   background: rgba(110,143,242,0.22);
   border: 1px solid rgba(110,143,242,0.38);
 
+  /* ✅ “바닥에서 살짝 떠있는” 그림자 */
   box-shadow:
-    0 16px 30px rgba(110,143,242,0.32),
+    0 10px 18px rgba(70,95,170,0.22),
+    0 2px 6px rgba(70,95,170,0.12),
     inset 0 1px 0 rgba(255,255,255,0.85),
-    inset 0 -1px 0 rgba(110,143,242,0.25);
+    inset 0 -1px 0 rgba(110,143,242,0.22);
 
-  backdrop-filter: blur(22px) saturate(135%);
-  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(14px) saturate(125%);          /* ✅ blur 줄여서 번짐 제거 */
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
 
   z-index: 3;
 }
@@ -541,7 +543,7 @@ body{
   background: transparent;
   outline: none;
 
-  font-size: 13px;              /* 👈 XP 느낌은 살짝 작게 */
+  font-size: 13px;
   letter-spacing: 0.4px;
 
   font-family: 'PxPlus IBM VGA8', monospace;
