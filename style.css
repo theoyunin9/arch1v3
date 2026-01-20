@@ -206,14 +206,14 @@ body{
   z-index: 2; /* 버튼이랑 겹쳐도 위에 떠 보이게 */
 
   /* ✅ 큰 창 안에서 여백 주고 들어가게 */
-  left: 38px;
-  right: 38px;
+  left: 32px;
+  right: 32px;
 
   /* ✅ 상단 여백만 1.7배 느낌으로 더 크게 */
   top: 72px;
-  bottom: 38px;
+  bottom: 32px;
 
-  background: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.85);
   border-radius: 18px;
 
   border: 1px solid rgba(255,255,255,0.9);
