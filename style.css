@@ -383,7 +383,7 @@ body{
   gap: 28px;
 }
 
-/* ✅ glass-layout 높이 기준 (중요) */
+/* ✅ glass-layout 높이 기준 */
 .inner-content{
   position: relative;
   min-height: 420px;
@@ -394,33 +394,33 @@ body{
   position: relative;
   border-radius: 22px;
 
-  /* 🔮 유리 핵심 텍스처 */
+  /* 🔮 더 투명한 유리 */
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.55),
-      rgba(255,255,255,0.18)
+      rgba(255,255,255,0.32),
+      rgba(255,255,255,0.12)
     );
 
-  backdrop-filter: blur(18px) saturate(120%);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
 
-  /* 아주 옅은 테두리 + 명암 */
+  /* ✨ 그림자 더 옅게 */
   box-shadow:
-    inset 0 1px 1px rgba(255,255,255,0.65),
-    inset 0 -1px 2px rgba(180,190,220,0.18),
-    0 18px 40px rgba(80,100,160,0.12);
+    inset 0 1px 1px rgba(255,255,255,0.55),
+    inset 0 -1px 1px rgba(180,190,220,0.12),
+    0 12px 28px rgba(80,100,160,0.08);
 
-  border: 1px solid rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.28);
 }
 
-/* ===== 큰 메인 유리판 ===== */
+/* ===== 큰 메인 유리판 (아래 부분 줄이기) ===== */
 .glass-main{
-  min-height: 320px;
+  min-height: 260px;   /* ⬅️ 기존 320 → 줄임 */
 }
 
-/* ===== 오른쪽 위 보조 유리판 ===== */
+/* ===== 오른쪽 위 보조 유리판 (조금 더 키우기) ===== */
 .glass-side{
-  min-height: 180px;
+  min-height: 220px;   /* ⬅️ 기존 180 → 늘림 */
   align-self: start;
 }
