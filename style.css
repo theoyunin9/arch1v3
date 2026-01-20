@@ -10,13 +10,12 @@ html, body{
   margin: 0;
 }
 
-/* ✅ 스크롤 완전 차단 (iOS에서 레이아웃 튐 방지) */
 body{
   overflow: hidden;
-  background: #fff; /* fallback */
+  background: #fff;
 }
 
-/* ✅ 배경을 body가 아니라 fixed 레이어로 박아버림 (제일 안정적) */
+/* 배경을 고정 레이어로 */
 .bg{
   position: fixed;
   inset: 0;
@@ -35,7 +34,6 @@ body{
     );
 }
 
-/* 유리 하이라이트 레이어 */
 .bg::before{
   content:"";
   position: absolute;
@@ -53,12 +51,10 @@ body{
       rgba(255,255,255,0.35),
       transparent 80%
     );
-
-  filter: blur(0px);
   opacity: 0.95;
 }
 
-/* ✅ 중앙 고정: iOS에서 제일 안정적인 방식 */
+/* 중앙 고정 */
 .stage{
   position: fixed;
   inset: 0;
@@ -67,17 +63,16 @@ body{
   display: grid;
   place-items: center;
 
-  /* iOS 주소창 흔들림 대응 */
   height: 100svh;
 }
 
-/* ✅ 창 1개 (4:3 유지) */
+/* 메인 창 */
 .main-window{
   aspect-ratio: 4 / 3;
-
-  /* 화면에 맞춰 자동 스케일 */
   width: min(92vw, calc(78svh * (4/3)));
   max-width: 980px;
+
+  position: relative; /* ✅ 버튼을 창 기준으로 고정하려면 필수 */
 
   border-radius: 28px;
 
@@ -89,4 +84,83 @@ body{
   box-shadow:
     0 24px 60px rgba(40,60,120,0.12),
     inset 0 1px 0 rgba(255,255,255,0.55);
+}
+
+/* =========================
+   ✅ 유리 동그라미 버튼
+   ========================= */
+
+/* 누나 스샷 느낌: 작고 동그랗고 유리감 + 살짝 핑크 */
+.glass-btn{
+  /* ✅ 위치/크기 고정 */
+  position: absolute;
+  top: 28px;
+  right: 28px;
+
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  border-radius: 999px; /* 완전 원 */
+  border: 1px solid rgba(255,255,255,0.75);
+
+  background:
+    radial-gradient(circle at 30% 25%,
+      rgba(255,255,255,0.95),
+      rgba(255,255,255,0.35) 45%,
+      rgba(255,160,190,0.35) 100%
+    );
+
+  box-shadow:
+    0 10px 22px rgba(40,60,120,0.16),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 눌렀을 때 살짝 들어가게 */
+.glass-btn:active{
+  transform: translateY(1px) scale(0.98);
+}
+
+/* 키보드 포커스(나중에 PC용) */
+.glass-btn:focus{
+  outline: none;
+}
+.glass-btn:focus-visible{
+  outline: 2px solid rgba(120,160,255,0.35);
+  outline-offset: 3px;
+}
+
+/* X 표시: CSS로 그리는 깔끔한 X */
+.x-mark{
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: auto;
+}
+
+.x-mark::before,
+.x-mark::after{
+  content:"";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 2px;
+  background: rgba(120, 60, 80, 0.55); /* ✅ 너무 검지 않게, 핑크톤 */
+  border-radius: 999px;
+  transform-origin: center;
+}
+
+.x-mark::before{
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.x-mark::after{
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
