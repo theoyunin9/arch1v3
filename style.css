@@ -383,7 +383,7 @@ body{
   gap: 28px;
 
   /* ⬇️ 전체 덩어리 살짝 아래로 */
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 /* ✅ glass-layout 높이 기준 */
@@ -433,7 +433,7 @@ body{
 
 .menu-strip{
   width: 100%;
-  height: 38px;
+  height: 34px;
   display: flex;
   align-items: stretch;
   box-sizing: border-box;
