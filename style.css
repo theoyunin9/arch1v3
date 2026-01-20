@@ -97,7 +97,7 @@ body{
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* ===== 🔴 유리 원형 버튼 ===== */
+/* ===== 🔴 유리 원형 버튼 (레퍼런스 느낌: 얇은 곡선 하이라이트 + 우하단 얇은 명암) ===== */
 .glass-btn{
   position: absolute;
   top: 24px;
@@ -108,86 +108,90 @@ body{
   padding: 0;
 
   border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.7);
+  border: 1.2px solid rgba(255,255,255,0.65);
 
+  /* 색감: 기존 레드 유지 + 조금 연하게 + 반투명 유리감 */
   background:
     radial-gradient(
       circle at 30% 30%,
-      rgba(255,255,255,0.75),
-      rgba(255,255,255,0.18) 38%,
-      rgba(255,90,120,0.55) 62%,
-      rgba(220,60,90,0.75) 100%
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,255,255,0.14) 28%,
+      rgba(255,90,120,0.42) 55%,
+      rgba(220,60,90,0.62) 100%
     );
 
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
   box-shadow:
-    0 12px 26px rgba(180,40,70,0.35),
-    inset 0 1px 2px rgba(255,255,255,0.7);
+    0 10px 22px rgba(180,40,70,0.28),
+    inset 0 1px 2px rgba(255,255,255,0.55);
 
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ✨ 좌상단 얇은 곡선 하이라이트 */
+/* ✨ 좌상단 “얇은 곡선” 하이라이트 (면 하이라이트 X, 라인 느낌) */
 .glass-btn::before{
   content:"";
   position:absolute;
-  width: 70%;
-  height: 70%;
-  top: 6px;
-  left: 6px;
-
+  inset: 4px;
   border-radius: 50%;
   pointer-events: none;
 
+  /* 얇은 호(arc)만 보이게 */
   background:
-    radial-gradient(
-      ellipse at top left,
-      rgba(255,255,255,0.75),
-      rgba(255,255,255,0.25) 40%,
-      transparent 60%
+    conic-gradient(
+      from 210deg,
+      rgba(255,255,255,0.0) 0deg,
+      rgba(255,255,255,0.0) 18deg,
+      rgba(255,255,255,0.85) 26deg,
+      rgba(255,255,255,0.0) 44deg,
+      rgba(255,255,255,0.0) 360deg
     );
 
-  transform: rotate(-20deg);
-  opacity: 0.85;
+  /* 곡선 두께 느낌: 살짝 블러 + 마스크로 링 형태 */
+  filter: blur(0.25px);
+  -webkit-mask: radial-gradient(circle, transparent 62%, #000 66%, #000 70%, transparent 74%);
+          mask: radial-gradient(circle, transparent 62%, #000 66%, #000 70%, transparent 74%);
+  opacity: 0.9;
 }
 
-/* 🌘 우하단 곡선 명암 */
+/* 🌘 우하단 “얇은 곡선” 명암 */
 .glass-btn::after{
   content:"";
   position:absolute;
-  width: 80%;
-  height: 80%;
-  bottom: 4px;
-  right: 4px;
-
+  inset: 4px;
   border-radius: 50%;
   pointer-events: none;
 
   background:
-    radial-gradient(
-      ellipse at bottom right,
-      rgba(0,0,0,0.25),
-      transparent 65%
+    conic-gradient(
+      from 20deg,
+      rgba(0,0,0,0.0) 0deg,
+      rgba(0,0,0,0.0) 210deg,
+      rgba(0,0,0,0.28) 240deg,
+      rgba(0,0,0,0.0) 290deg,
+      rgba(0,0,0,0.0) 360deg
     );
 
-  opacity: 0.4;
+  filter: blur(0.35px);
+  -webkit-mask: radial-gradient(circle, transparent 60%, #000 66%, #000 72%, transparent 78%);
+          mask: radial-gradient(circle, transparent 60%, #000 66%, #000 72%, transparent 78%);
+  opacity: 0.55;
 }
+
 .glass-btn:active{
   transform: translateY(1px) scale(0.97);
 }
 
-/* ===== ❌ X 마크 (47% 유지) ===== */
+/* ===== ❌ X 마크 (47% 유지 + 흰색) ===== */
 .x-mark{
   position: absolute;
   left: 50%;
   top: 50%;
   width: 14px;
   height: 14px;
-
-  /* ❗ 그대로 유지 */
   transform: translate(-47%, -50%);
 }
 
@@ -198,14 +202,13 @@ body{
   left: 50%;
   top: 50%;
   width: 14px;
-  height: 1.6px;
-  background: rgba(120,20,30,0.85);
+  height: 1.8px;
+  background: rgba(255,255,255,0.92);
   border-radius: 2px;
+
+  /* 흰색이 배경에 묻히면 살짝 또렷하게 */
+  box-shadow: 0 0 2px rgba(0,0,0,0.12);
 }
 
-.x-mark::before{
-  transform: translate(-50%,-50%) rotate(45deg);
-}
-.x-mark::after{
-  transform: translate(-50%,-50%) rotate(-45deg);
-}
+.x-mark::before{ transform: translate(-50%,-50%) rotate(45deg); }
+.x-mark::after { transform: translate(-50%,-50%) rotate(-45deg); }
