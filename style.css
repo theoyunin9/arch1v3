@@ -449,7 +449,7 @@ body{
 
 /* menu-item 공통 */
 .menu-item{
-  width: 72px;                  /* 👈 각 좁은 칸 폭 (조절 포인트) */
+  width: 80px;                  /* 👈 각 좁은 칸 폭 (조절 포인트) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -484,4 +484,20 @@ body{
 /* iOS 터치 하이라이트 제거 */
 .menu-item{
   -webkit-tap-highlight-color: transparent;
+}
+
+
+/* 마지막 menu-item 오른쪽 세로선 */
+.menu-item:last-child{
+  position: relative;
+}
+
+.menu-item:last-child::after{
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: rgba(120,120,120,0.35);
 }
