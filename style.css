@@ -427,3 +427,64 @@ body{
   min-height: 220px; /* ⬅️ 기존 180 → 늘림 */
   align-self: start;
 }
+
+
+/* ===== Top Blue Glass Bar (overlay) ===== */
+.inner-window{
+  position: relative; /* 바가 inner-window 기준으로 붙게 */
+}
+
+/* inner-content랑 좌우 폭/여백 "완전 동일" 맞추기 */
+.top-glass-bar{
+  --bar-h: 52px;          /* 높이(원하면 44~60 사이로 조절) */
+  --side-pad: 36px;       /* glass-layout padding이 36px라서 동일하게 맞춤 */
+  --r: 18px;              /* 모서리 */
+  --blue: 83,124,241;     /* #537cf1 */
+
+  position: absolute;
+  top: 0;
+  left: var(--side-pad);
+  right: var(--side-pad);
+  height: var(--bar-h);
+
+  border-radius: var(--r);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(var(--blue), 0.26),
+      rgba(var(--blue), 0.12)
+    );
+
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+  border: 1px solid rgba(255,255,255,0.22);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.45),
+    inset 0 -1px 2px rgba(20,40,100,0.12),
+    0 10px 26px rgba(50,70,140,0.10);
+
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 바가 덮지 않게 콘텐츠를 아래로 밀기 (비는 부분 없이 자연스럽게) */
+.inner-titlebar,
+.inner-content{
+  position: relative;
+  z-index: 2;
+}
+
+.inner-content{
+  padding-top: 18px; /* 바 아래 여백 살짝(원하면 12~24) */
+}
+
+/* 모바일에서 패딩이 바뀌면 같이 맞추기 */
+@media (max-width: 700px){
+  .top-glass-bar{
+    --side-pad: 22px;  /* 너가 타이틀바 left 22 쓴 것처럼 모바일에 맞춤 */
+    --bar-h: 48px;
+  }
+}
