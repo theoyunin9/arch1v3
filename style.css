@@ -506,10 +506,10 @@ body{
 .bottom-search{
   position: absolute;
   left: 50%;
-  bottom: 16px;
+  bottom: 12px;
 
   /* 👇 핵심: 위치 + 크기 동시 보정 */
-  transform: translateX(-50%) scale(0.45);
+  transform: translateX(-50%) scale(0.55);
   transform-origin: center bottom;
 
   width: 43%;
