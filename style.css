@@ -383,7 +383,7 @@ body{
   gap: 28px;
 
   /* ⬇️ 전체 덩어리 살짝 아래로 */
-  margin-top: 2px;
+  margin-top: -8px;
 }
 
 /* ✅ glass-layout 높이 기준 */
