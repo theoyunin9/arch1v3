@@ -429,3 +429,50 @@ body{
 }
 
 
+/* ===== Top Blue Glass Bar (fits INNER-WINDOW exactly) ===== */
+.inner-window{
+  position: relative; /* bar가 inner-window 기준으로 붙게 */
+}
+
+/* 2층 흰색판(inner-window) 안쪽에 딱 맞는 상단 유리바 */
+.top-glass-bar{
+  /* 조절 포인트 */
+  --bar-h: 52px;      /* 높이 */
+  --inset: 18px;      /* 흰색판 안쪽 여백(모서리랑 딱 맞추는 값) */
+  --r: 18px;          /* 모서리 곡률(흰색판이랑 비슷하게) */
+
+  position: absolute;
+  left: var(--inset);
+  right: var(--inset);
+  top: var(--inset);
+  height: var(--bar-h);
+
+  border-radius: var(--r);
+
+  /* #537cf1 기반 “연한 파란 유리” */
+  background: linear-gradient(
+    180deg,
+    rgba(83,124,241,0.22),
+    rgba(83,124,241,0.10)
+  );
+
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+  border: 1px solid rgba(255,255,255,0.22);
+
+  /* 그림자: 너무 진하지 않게, 유리 느낌 */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.40),
+    inset 0 -1px 2px rgba(20,40,100,0.10),
+    0 10px 26px rgba(50,70,140,0.10);
+
+  pointer-events: none; /* 클릭 방해 안 하게 */
+  z-index: 2; /* 패널보다 위에, 타이틀/엑스는 보통 더 위(기존값 따라감) */
+}
+
+/* 유리바가 내용 가리지 않게, 컨텐츠를 아래로 살짝 밀기 */
+.inner-content{
+  padding-top: 28px; /* 원하면 18~40 사이로 조절 */
+}
+
