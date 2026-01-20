@@ -506,7 +506,7 @@ body{
 .bottom-search{
   position: absolute;
   left: 50%;
-  bottom: 22px;
+  bottom: 16px;
   transform: translateX(-50%);
 
   width: 62%;
