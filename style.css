@@ -350,6 +350,13 @@ body{
   animation: caretBlink 0.95s steps(1, end) infinite;
 }
 
+/* ✅ 혹시 다른 CSS에서 | 커서를 만들고 있으면 이걸로 강제 제거 */
+.main-title .caret::before,
+.main-title .caret::after{
+  content: "" !important;
+  display: none !important;
+}
+
 @keyframes caretBlink{
   50%{ opacity: 0; }
 }
