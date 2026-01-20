@@ -265,3 +265,95 @@ body{
     height: calc(100% - 56px);
   }
 }
+
+/* ===== 메인 창 상단 타이핑 타이틀 ===== */
+.main-titlebar{
+  position: absolute;
+  left: 34px;
+  top: 22px;
+  right: 90px; /* 우상단 버튼 영역 피하기 */
+  z-index: 5;
+  pointer-events: none;
+}
+
+.main-title{
+  display: inline-block;
+  white-space: nowrap;
+  font-style: italic;
+  letter-spacing: 0.4px;
+
+  /* “유리 광택” 느낌 */
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.40) 35%,
+    rgba(255,255,255,0.10) 55%,
+    rgba(255,255,255,0.70) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: rgba(116,146,219,0.92); /* fallback */
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.55),
+    0 10px 22px rgba(60,90,160,0.18);
+}
+
+/* 폰트: Mac OS 9 큰 글씨 느낌(세리프 계열) */
+.main-title,
+.main-title *{
+  font-family: "Times New Roman", Times, "Georgia", serif;
+}
+
+/* 앞(ARCH1V3D) 더 크게 */
+.main-title .front{
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* 구분자/뒤는 조금 작게 */
+.main-title .sep,
+.main-title .back{
+  font-size: 22px;
+  line-height: 1;
+  margin-left: 6px;
+}
+
+/* 기본색/랜덤 빨강 */
+.main-title .char{
+  color: rgba(116,146,219,0.92);
+  -webkit-text-fill-color: transparent; /* 위에 그라데이션 유지용 */
+}
+.main-title .char.red{
+  color: rgba(152,42,40,0.95);
+  -webkit-text-fill-color: transparent;
+}
+
+/* 커서 */
+.main-title .caret{
+  display: inline-block;
+  width: 10px;
+  margin-left: 6px;
+  transform: translateY(-1px);
+}
+.main-title .caret::after{
+  content: "|";
+  -webkit-text-fill-color: rgba(116,146,219,0.9);
+  color: rgba(116,146,219,0.9);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.45),
+    0 8px 18px rgba(60,90,160,0.18);
+  animation: caretBlink 0.9s steps(1, end) infinite;
+}
+
+@keyframes caretBlink{
+  50%{ opacity: 0; }
+}
+
+/* 화면 작아질 때 살짝 줄이기 */
+@media (max-width: 700px){
+  .main-titlebar{ left: 22px; top: 18px; right: 76px; }
+  .main-title .front{ font-size: 26px; }
+  .main-title .sep, .main-title .back{ font-size: 19px; }
+}
