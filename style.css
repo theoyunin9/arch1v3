@@ -455,9 +455,11 @@ body{
   justify-content: center;
 
   text-decoration: none;
-  font-family: ui-monospace, Menlo, Monaco, "Courier New", monospace;
-  font-size: 12px;
-  letter-spacing: 0.5px;
+
+  /* ✅ 픽셀 폰트 */
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;              /* 픽셀 폰트 최적 */
+  letter-spacing: 0px;
 
   color: rgba(120,120,120,0.45);
   box-sizing: border-box;
