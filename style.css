@@ -506,7 +506,7 @@ body{
 .bottom-search{
   position: absolute;
   left: 50%;
-  bottom: 12px;
+  bottom: 8px;
   transform: translateX(-50%);
 
   width: 43%;              /* ✅ 기존 62% → 약 70% 수준으로 축소 */
