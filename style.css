@@ -502,17 +502,16 @@ body{
   background: rgba(120,120,120,0.35);
 }
 
-/* ===== bottom search bar (glass blue ver) ===== */
+/* ===== bottom search bar (XP pixel vibe) ===== */
 .bottom-search{
-  /* 👇 위치: 2번째 흰 창 위 / 중앙 */
   position: absolute;
   left: 50%;
-  bottom: 32px;                 /* ← 더 위로 올리고 싶으면 숫자 키워 */
+  bottom: 22px;
   transform: translateX(-50%);
 
   width: 62%;
   max-width: 520px;
-  height: 46px;                 /* ← 세로 살짝 줄임 */
+  height: 46px;
 
   display: flex;
   align-items: center;
@@ -520,19 +519,18 @@ body{
 
   padding: 0 18px;
   box-sizing: border-box;
-
   border-radius: 999px;
 
-  /* 👇 연한 파랑 유리 */
-  background: rgba(123,158,255,0.22);
-  border: 1px solid rgba(123,158,255,0.38);
+  background: rgba(110,143,242,0.22);
+  border: 1px solid rgba(110,143,242,0.38);
 
   box-shadow:
-    0 16px 30px rgba(123,158,255,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.8);
+    0 16px 30px rgba(110,143,242,0.32),
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(110,143,242,0.25);
 
-  backdrop-filter: blur(20px) saturate(130%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
 
   z-index: 3;
 }
@@ -543,12 +541,14 @@ body{
   background: transparent;
   outline: none;
 
-  font-size: 14px;
-  font-family: ui-monospace, Menlo, Monaco, monospace;
+  font-size: 13px;              /* 👈 XP 느낌은 살짝 작게 */
+  letter-spacing: 0.4px;
 
-  color: #4f6fe6;               /* 👈 더 잘 보이게 */
+  font-family: 'PxPlus IBM VGA8', monospace;
+
+  color: #6e8ff2;
 }
 
 .bottom-search input::placeholder{
-  color: rgba(79,111,230,0.55);
+  color: rgba(110,143,242,0.55);
 }
