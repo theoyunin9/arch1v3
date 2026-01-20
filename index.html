@@ -4,15 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ARCHIV3D</title>
-  <link rel="stylesheet" href="./style.css" />
+
+  <!-- ✅ 캐시 무력화: 숫자만 바꿔주면 iPad에서도 100% 새 CSS 먹음 -->
+  <link rel="stylesheet" href="./style.css?v=20260120-2" />
 </head>
 
 <body>
-  <div class="bg"></div>
+  <div class="bg" aria-hidden="true"></div>
 
   <main class="stage">
     <section class="main-window" aria-label="main window">
-      <!-- ✅ 이 버튼이 “정확히” 있어야 함 (class 철자 그대로) -->
       <button class="glass-btn" type="button" aria-label="close">
         <span class="x-mark" aria-hidden="true"></span>
       </button>
