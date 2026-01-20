@@ -164,3 +164,18 @@ body{
 .x-mark::after{
   transform: translate(-50%, -50%) rotate(-45deg);
 }
+
+/* ✅ 디버그: 버튼이 적용되고 있는지 무조건 보이게 */
+.glass-btn{
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+
+  width: 36px !important;
+  height: 36px !important;
+
+  border-radius: 999px !important;
+  background: rgba(255, 80, 140, 0.35) !important; /* 일부러 눈에 띄게 */
+  border: 2px solid rgba(255,255,255,0.9) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
