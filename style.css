@@ -199,3 +199,69 @@ body{
 .x-mark::after{
   transform: translate(-50%,-50%) rotate(-45deg);
 }
+
+/* ===== 안쪽 흰 창(작은 창) ===== */
+.inner-window{
+  position: absolute;
+  z-index: 2; /* 버튼이랑 겹쳐도 위에 떠 보이게 */
+
+  /* ✅ 큰 창 안에서 여백 주고 들어가게 */
+  left: 64px;
+  right: 64px;
+
+  /* ✅ 상단 여백만 1.7배 느낌으로 더 크게 */
+  top: 56px;
+  bottom: 64px;
+
+  background: rgba(255,255,255,0.92);
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow:
+    0 18px 40px rgba(40,60,120,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* 작은 창 상단(글자 들어갈 영역) */
+.inner-titlebar{
+  height: 64px;            /* ← 여기서 “상단 여백” 느낌 조절 */
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-end;   /* 글자를 아래쪽에 살짝 붙여서 예쁘게 */
+}
+
+/* 타이틀 텍스트 */
+.inner-title{
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: rgba(20,30,60,0.85);
+}
+
+/* 작은 창 내용 영역 */
+.inner-content{
+  padding: 18px 22px 22px;
+  height: calc(100% - 64px); /* titlebar 높이만큼 빼기 */
+  overflow: hidden;          /* 일단 깔끔하게 (나중에 스크롤로 바꿔도 됨) */
+}
+
+/* ✅ 화면 작아질 때 여백 자동으로 줄이기 */
+@media (max-width: 700px){
+  .inner-window{
+    left: 22px;
+    right: 22px;
+    top: 44px;
+    bottom: 22px;
+  }
+  .inner-titlebar{
+    height: 56px;
+    padding: 16px 18px;
+  }
+  .inner-title{
+    font-size: 20px;
+  }
+  .inner-content{
+    padding: 16px 18px 18px;
+    height: calc(100% - 56px);
+  }
+}
