@@ -157,7 +157,6 @@ body{
   width: 14px;
   height: 14px;
   transform: translate(-50%, -50%);
-  pointer-events: none;
 }
 
 .x-mark::before,
@@ -167,10 +166,9 @@ body{
   left: 50%;
   top: 50%;
   width: 14px;
-  height: 2px;
+  height: 1.6px;
   background: rgba(120,20,30,0.85);
   border-radius: 2px;
-  transform-origin: center;
 }
 
 .x-mark::before{
