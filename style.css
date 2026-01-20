@@ -429,47 +429,57 @@ body{
 }
 
 
-/* ======= Top menu strip (Mac OS 느낌) ======= */
+/* ===== Top menu strip (left narrow + right empty) ===== */
+
 .menu-strip{
   width: 100%;
-  height: 46px;                 /* 메뉴바 높이 */
+  height: 46px;
   display: flex;
-  align-items: center;
-  gap: 0;                       /* 칸 사이 간격 X */
-  padding: 0 18px;              /* 좌우 여백 */
+  align-items: stretch;
   box-sizing: border-box;
 
-  /* 아래 가로선만 */
   border-bottom: 1px solid rgba(120,120,120,0.45);
+  padding: 0 18px;
 }
 
-/* 각 칸: 세로선만 보이게 */
+/* 왼쪽 메뉴 묶음 */
+.menu-strip{
+  justify-content: flex-start;
+}
+
+/* menu-item 공통 */
 .menu-item{
-  flex: 1;                      /* 5칸 균등 */
-  height: 100%;
+  width: 72px;                  /* 👈 각 좁은 칸 폭 (조절 포인트) */
   display: flex;
   align-items: center;
   justify-content: center;
 
-  text-decoration: none;        /* 밑줄 제거 */
-  font-family: ui-monospace, Menlo, Monaco, "Courier New", monospace; /* 일단 안전빵 */
+  text-decoration: none;
+  font-family: ui-monospace, Menlo, Monaco, "Courier New", monospace;
   font-size: 12px;
   letter-spacing: 0.5px;
 
-  color: rgba(120,120,120,0.45); /* 기본: 연한 회색 */
+  color: rgba(120,120,120,0.45);
+  box-sizing: border-box;
 }
 
-/* 세로 구분선: 왼쪽에만 */
+/* 세로 구분선 */
 .menu-item + .menu-item{
   border-left: 1px solid rgba(120,120,120,0.35);
 }
 
-/* main(활성)만 진한 회색 */
+/* active (main) */
 .menu-item.is-active{
   color: rgba(80,80,80,0.85);
 }
 
-/* iOS에서 링크 눌렀을 때 파란 하이라이트 방지 */
+/* 오른쪽 빈 영역 */
+.menu-strip::after{
+  content: "";
+  flex: 1;                      /* 👈 나머지 약 65% 자동 확보 */
+}
+
+/* iOS 터치 하이라이트 제거 */
 .menu-item{
   -webkit-tap-highlight-color: transparent;
 }
