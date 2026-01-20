@@ -1,20 +1,11 @@
-/* ===== 1단계: 유리 느낌 배경 ===== */
+/* ===== 1단계: 유리 느낌 배경 (자연스럽게) ===== */
 
 :root{
+  /* 누나가 준 기준색 기반 (조금 진하게) */
   --glass-base: #c9dbff;
+
+  /* 공통 */
   --ink: #12121a;
-
-  /* ✅ 투명도: 바닥은 더 투명 / 위창은 지금 정도 */
-  --base-alpha: 0.38;      /* 바닥창: 조금 더 투명하게 */
-  --overlay-alpha: 0.55;   /* 위창: 현재 보이는 정도 투명도 */
-
-  /* ✅ 여백 비율 (상:좌:우:하 = 1.5:1:1:1) */
-  --gap: clamp(18px, 2.2vw, 26px);
-  --gap-top: calc(var(--gap) * 1.5);
-
-  /* 둥글기 */
-  --r-base: 28px;
-  --r-overlay: 24px;
 }
 
 *{ box-sizing: border-box; }
@@ -23,11 +14,12 @@ html, body{ height: 100%; }
 body{
   margin: 0;
   color: var(--ink);
-  body{
-  overflow-x: hidden;
-  overflow-y: auto;
-}
 
+  /* ✅ 지금은 콘텐츠 거의 없으니까 스크롤 자체를 막아서
+     아래 흰 여백/빈공간이 생기는 거 방지 */
+  overflow: hidden;
+
+  /* 💎 더 자연스러운 유리 그라데이션 */
   background:
     linear-gradient(
       to bottom,
@@ -41,7 +33,7 @@ body{
     );
 }
 
-/* 유리 하이라이트 */
+/* ===== 유리 하이라이트 + 반투명 레이어 ===== */
 body::before{
   content:"";
   position: fixed;
@@ -65,62 +57,43 @@ body::before{
   opacity: 0.9;
 }
 
-/* 화면 중앙 고정 */
+
+/* ===== 2단계: 중앙 메인 창 프레임 ===== */
+
+/* ✅ iOS 사파리에서 100vh가 흔들려서 아래 여백 생기는 걸 막기 위해
+   svh/dvh 우선 적용 + padding 제거 */
 .stage{
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-}
+  height: 100svh;
+  height: 100dvh;
+  height: 100vh;
 
   display: grid;
   place-items: center;
+
   padding: 0;
 }
 
-/* ===== 2단계: 바닥 메인 창(더 투명) ===== */
-.base-window{
+/* ✅ 어떤 기기에서도 4:3 비율 유지 + 화면 크기에 맞춰 자동 스케일 */
+.main-window{
   aspect-ratio: 4 / 3;
+
+  /* 화면 가로/세로 중 작은 쪽 기준으로 안전하게 맞춤 */
   width: min(92vw, calc(78svh * (4/3)));
   max-width: 980px;
 
-  position: relative;
-  z-index: 1;
+  /* 살짝 반투명한 판 */
+  background: rgba(255, 255, 255, 0.55);
 
-  border-radius: var(--r-base);
-
-  background: rgba(255,255,255, var(--base-alpha));
+  /* 유리 질감 */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  border: 1.3px solid rgba(255,255,255,0.52);
+  /* 테두리 & 모서리 */
+  border-radius: 28px;
+  border: 1.5px solid rgba(255,255,255,0.6);
+
+  /* 깊이감 */
   box-shadow:
-    0 22px 50px rgba(40,60,120,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.55);
-}
-
-/* ===== 3단계: 위에 얹는 새 창(검은선 영역 느낌) ===== */
-.overlay-window{
-  position: absolute;
-  z-index: 2;
-
-  /* ✅ “검은선으로 그린 만큼” 안쪽 여백
-     상단만 1.5배, 좌/우/하단 동일 */
-  top: var(--gap-top);
-  left: var(--gap);
-  right: var(--gap);
-  bottom: var(--gap);
-
-  border-radius: var(--r-overlay);
-
-  /* ✅ 위창은 덜 투명(지금 정도) */
-  background: rgba(255,255,255, var(--overlay-alpha));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  /* ✅ 얹힌 느낌: 테두리/그림자 더 강하게 */
-  border: 1.6px solid rgba(255,255,255,0.72);
-  box-shadow:
-    0 30px 70px rgba(40,60,120,0.16),
-    0 10px 22px rgba(40,60,120,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.70);
+    0 20px 40px rgba(40,60,120,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.6);
 }
