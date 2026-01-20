@@ -1,24 +1,26 @@
-/* ===== 배경(유리 그라데이션) + 창 1개만 ===== */
-
 :root{
-  /* 누나 기준색 */
   --glass-base: #c9dbff;
-  --ink: #12121a;
-
-  /* ✅ 창 투명도: 숫자 낮을수록 더 투명
-     (기존 0.55보다 더 투명하게 = 0.42) */
   --window-alpha: 0.42;
 }
 
 *{ box-sizing: border-box; }
-html, body{ height: 100%; }
 
-body{
+html, body{
+  height: 100%;
   margin: 0;
-  color: var(--ink);
+}
 
-  /* ✅ iOS에서 화면 증발 방지: 스크롤은 세로만 허용 */
-  overflow-x: hidden;
+/* ✅ 스크롤 완전 차단 (iOS에서 레이아웃 튐 방지) */
+body{
+  overflow: hidden;
+  background: #fff; /* fallback */
+}
+
+/* ✅ 배경을 body가 아니라 fixed 레이어로 박아버림 (제일 안정적) */
+.bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 
   background:
     linear-gradient(
@@ -33,10 +35,10 @@ body{
     );
 }
 
-/* 유리 하이라이트 */
-body::before{
+/* 유리 하이라이트 레이어 */
+.bg::before{
   content:"";
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
 
@@ -52,37 +54,38 @@ body::before{
       transparent 80%
     );
 
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  opacity: 0.9;
+  filter: blur(0px);
+  opacity: 0.95;
 }
 
-/* 중앙 정렬: iOS 안전하게 min-height로 */
+/* ✅ 중앙 고정: iOS에서 제일 안정적인 방식 */
 .stage{
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+
   display: grid;
   place-items: center;
-  padding: 0;
+
+  /* iOS 주소창 흔들림 대응 */
+  height: 100svh;
 }
 
-/* ✅ 창 1개: 스샷 같은 비율(4:3) 유지 */
+/* ✅ 창 1개 (4:3 유지) */
 .main-window{
   aspect-ratio: 4 / 3;
 
-  /* 화면 크기에 따라 자동으로 커지되, 안 넘치게 */
+  /* 화면에 맞춰 자동 스케일 */
   width: min(92vw, calc(78svh * (4/3)));
   max-width: 980px;
 
   border-radius: 28px;
 
-  /* 창: 더 투명하게 */
   background: rgba(255, 255, 255, var(--window-alpha));
-
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
   border: 1.4px solid rgba(255,255,255,0.60);
-
   box-shadow:
     0 24px 60px rgba(40,60,120,0.12),
     inset 0 1px 0 rgba(255,255,255,0.55);
