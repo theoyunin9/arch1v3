@@ -12,7 +12,17 @@ html, body{
 
 body{
   overflow: hidden;
-  background: #fff;
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #ffffff 30%,
+      #f7f9ff 42%,
+      #eef3ff 55%,
+      #e4ecff 68%,
+      #d8e4ff 80%,
+      var(--glass-base) 100%
+    );
 }
 
 /* 배경 고정 레이어 */
