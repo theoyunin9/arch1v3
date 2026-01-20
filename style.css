@@ -23,7 +23,10 @@ html, body{ height: 100%; }
 body{
   margin: 0;
   color: var(--ink);
-  overflow: hidden;
+  body{
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
   background:
     linear-gradient(
@@ -64,9 +67,10 @@ body::before{
 
 /* 화면 중앙 고정 */
 .stage{
-  height: 100svh;
-  height: 100dvh;
-  height: 100vh;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
 
   display: grid;
   place-items: center;
