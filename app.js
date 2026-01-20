@@ -51,3 +51,63 @@
     });
   });
 })();
+
+// ===== 메인 타이틀 타이핑 =====
+document.addEventListener("DOMContentLoaded", () => {
+  const frontEl = document.getElementById("titleFront");
+  const sepEl   = document.getElementById("titleSep");
+  const backEl  = document.getElementById("titleBack");
+
+  const frontText = "ARCHIV3D";
+  const sepText   = " — ";
+  const backText  = "but not resolved";
+
+  // 초기화
+  frontEl.textContent = "";
+  sepEl.textContent = "";
+  backEl.textContent = "";
+
+  const baseColor = "rgba(116,146,219,0.95)";
+  const rareColor = "rgba(152,42,40,0.95)";
+
+  function pickColor(){
+    // 12% 확률로 빨간 글자
+    return (Math.random() < 0.12) ? rareColor : baseColor;
+  }
+
+  function typeOneByOne(el, text, done){
+    let i = 0;
+
+    const tick = () => {
+      if (i >= text.length) { done?.(); return; }
+
+      const ch = text[i];
+      const span = document.createElement("span");
+      span.textContent = ch;
+      span.style.color = pickColor();
+
+      // 빨간 글자일 때도 유리광 유지
+      if (span.style.color.includes("152")) {
+        span.style.textShadow = "0 0 6px rgba(152,42,40,0.45)";
+      }
+
+      el.appendChild(span);
+      i++;
+
+      // 속도: 자연스러운 타자 + 공포 연출 사이
+      const base = 80;                 // 기본 속도
+      const jitter = Math.random() * 90; // 랜덤 흔들림
+      const pause = (ch === " " || ch === "—") ? 220 : 0; // 공백/대시 멈칫
+
+      setTimeout(tick, base + jitter + pause);
+    };
+
+    tick();
+  }
+
+  typeOneByOne(frontEl, frontText, () => {
+    typeOneByOne(sepEl, sepText, () => {
+      typeOneByOne(backEl, backText);
+    });
+  });
+});
