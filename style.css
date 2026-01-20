@@ -282,22 +282,18 @@ body{
   font-style: italic;
   letter-spacing: 0.4px;
 
-  /* “유리 광택” 느낌 */
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.95) 0%,
-    rgba(255,255,255,0.40) 35%,
-    rgba(255,255,255,0.10) 55%,
-    rgba(255,255,255,0.70) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: rgba(116,146,219,0.92); /* fallback */
-  -webkit-text-fill-color: transparent;
+  /* ✅ 글씨가 하얗게 뜨는 원인 제거:
+     background-clip/text-fill 투명 사용 X */
+  color: rgba(116,146,219,0.92);
 
+  /* 유리/광택 느낌은 그림자 + 상단 하이라이트로 */
   text-shadow:
     0 1px 0 rgba(255,255,255,0.55),
+    0 0 6px rgba(116,146,219,0.22),
     0 10px 22px rgba(60,90,160,0.18);
+
+  /* 살짝 또렷하게 (선택) */
+  -webkit-text-stroke: 0.3px rgba(60,90,160,0.18);
 }
 
 /* 폰트: Mac OS 9 큰 글씨 느낌(세리프 계열) */
@@ -320,31 +316,38 @@ body{
   margin-left: 6px;
 }
 
-/* 기본색/랜덤 빨강 */
+/* ===== 타이핑 글자(랜덤 빨강 포함) =====
+   ✅ JS에서 span에 class="char"를 붙인다는 전제 */
 .main-title .char{
   color: rgba(116,146,219,0.92);
-  -webkit-text-fill-color: transparent; /* 위에 그라데이션 유지용 */
-}
-.main-title .char.red{
-  color: rgba(152,42,40,0.95);
-  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.55),
+    0 0 6px rgba(116,146,219,0.20),
+    0 10px 22px rgba(60,90,160,0.18);
 }
 
-/* 커서 */
+.main-title .char.red{
+  color: rgba(152,42,40,0.95);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.35),
+    0 0 6px rgba(152,42,40,0.25),
+    0 10px 22px rgba(90,30,30,0.16);
+}
+
+/* ===== 커서: 두꺼운 블록 커서 ===== */
 .main-title .caret{
   display: inline-block;
-  width: 10px;
-  margin-left: 6px;
-  transform: translateY(-1px);
-}
-.main-title .caret::after{
-  content: "|";
-  -webkit-text-fill-color: rgba(116,146,219,0.9);
-  color: rgba(116,146,219,0.9);
-  text-shadow:
+  width: 7px;      /* ✅ 두께 */
+  height: 1.05em;  /* 글자 높이에 맞춤 */
+  margin-left: 8px;
+  transform: translateY(2px);
+
+  background: rgba(116,146,219,0.90);
+  box-shadow:
     0 1px 0 rgba(255,255,255,0.45),
-    0 8px 18px rgba(60,90,160,0.18);
-  animation: caretBlink 0.9s steps(1, end) infinite;
+    0 0 8px rgba(116,146,219,0.30);
+
+  animation: caretBlink 0.95s steps(1, end) infinite;
 }
 
 @keyframes caretBlink{
