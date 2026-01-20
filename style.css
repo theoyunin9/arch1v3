@@ -14,10 +14,7 @@ html, body{ height: 100%; }
 body{
   margin: 0;
   color: var(--ink);
-
-  /* ✅ 지금은 콘텐츠 거의 없으니까 스크롤 자체를 막아서
-     아래 흰 여백/빈공간이 생기는 거 방지 */
-  overflow: hidden;
+  overflow-x: hidden;
 
   /* 💎 더 자연스러운 유리 그라데이션 */
   background:
@@ -60,26 +57,16 @@ body::before{
 
 /* ===== 2단계: 중앙 메인 창 프레임 ===== */
 
-/* ✅ iOS 사파리에서 100vh가 흔들려서 아래 여백 생기는 걸 막기 위해
-   svh/dvh 우선 적용 + padding 제거 */
 .stage{
-  height: 100svh;
-  height: 100dvh;
-  height: 100vh;
-
+  min-height: 100vh;
   display: grid;
   place-items: center;
-
-  padding: 0;
+  padding: 40px 20px;
 }
 
-/* ✅ 어떤 기기에서도 4:3 비율 유지 + 화면 크기에 맞춰 자동 스케일 */
 .main-window{
-  aspect-ratio: 4 / 3;
-
-  /* 화면 가로/세로 중 작은 쪽 기준으로 안전하게 맞춤 */
-  width: min(92vw, calc(78svh * (4/3)));
-  max-width: 980px;
+  width: min(960px, 92vw);
+  height: min(640px, 78vh);
 
   /* 살짝 반투명한 판 */
   background: rgba(255, 255, 255, 0.55);
