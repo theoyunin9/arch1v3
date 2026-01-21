@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>ARCHIV3D / file</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FILE</title>
+
+  <!-- 폰트(필요하면 index랑 동일하게) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=PxPlus+IBM+VGA8&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css?v=20260120-2" />
 </head>
 
 <body>
-  <!-- 배경 (그라데이션, 공통) -->
-  <div class="bg"></div>
+  <div class="bg" aria-hidden="true"></div>
 
-  <!-- 페이지 전환용 -->
-  <div class="page-fade">
+  <main class="stage">
+    <!-- ✅ 메인창과 크기/위치 완전 동일 -->
+    <section class="main-window file-window" aria-label="file window">
+      <!-- 여기 내용은 너가 채우면 됨 -->
+    </section>
+  </main>
 
-    <div class="file-window">
-      file archive
-    </div>
-
-  </div>
-
-  <script src="app.js"></script>
+  <script src="./app.js?v=20260120-1"></script>
 </body>
 </html>
