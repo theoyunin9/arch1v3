@@ -554,110 +554,50 @@ body{
 
 /* ===== page transition ===== */
 body{
-  transition:
-    opacity .35s ease,
-    transform .35s ease,
-    filter .35s ease;
+  transition: opacity .22s ease, transform .22s ease, filter .22s ease;
 }
 
-/* 나갈 때(메인 → file) */
+/* 나갈 때(클릭 후) */
 html.page-leave body{
   opacity: 0;
   transform: translateY(6px);
-  filter: blur(2px);
+  filter: blur(1px);
 }
 
-/* 들어올 때(file 진입) */
+/* (선택) 들어올 때 */
 html.page-enter body{
   opacity: 0;
-  transform: translateY(-4px);
-  filter: blur(2px);
+  transform: translateY(6px);
+  filter: blur(1px);
 }
 
-/* 접근성 */
 @media (prefers-reduced-motion: reduce){
   body{ transition: none; }
-  html.page-leave body,
-  html.page-enter body{
-    opacity: 1;
-    transform: none;
-    filter: none;
+  html.page-leave body, html.page-enter body{
+    opacity: 1; transform: none; filter: none;
   }
 }
 
 
 /* ===== file.html window skin (same size as .main-window) ===== */
 .file-window{
-  /* 메인창 동일 크기/위치 유지 */
-  background: rgba(139,144,157,0.28);   /* ⬅️ 채도 약간 ↑ */
-  border: 1.4px solid rgba(255,255,255,0.35);
+  /* 메인창 동일 크기/위치 유지, 색만 변경 */
+  background: rgba(139,144,157,0.22);             /* #8b909d 느낌 */
+  border: 1.4px solid rgba(255,255,255,0.28);
 
   box-shadow:
-    0 26px 64px rgba(40,60,120,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.45);
+    0 24px 60px rgba(40,60,120,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-
-/* ❌ 기존 ‘흰 선’ 제거 */
-/*
+/* ✅ 맨 위 흰 줄 1개 (너가 말한 3번째 사진 느낌) */
 .file-window::before{
   content:"";
   position:absolute;
   left: 0;
   right: 0;
-  top: 58px;
+  top: 58px; /* “창 맨 위쪽” 느낌으로 적당히. 더 위/아래 원하면 숫자만 조절 */
   height: 1px;
   background: rgba(255,255,255,0.9);
   opacity: 0.9;
-}
-*/
-
-
-/* ===== FILE 내부 큰 창 ===== */
-.file-inner-window{
-  position: absolute;
-  left: 32px;
-  right: 32px;
-  top: 32px;
-  bottom: 32px;
-
-  border-radius: 22px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(160,166,180,0.92),
-      rgba(139,144,157,0.92)
-    );
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  box-shadow:
-    0 22px 50px rgba(40,60,120,0.20),
-    inset 0 1px 0 rgba(255,255,255,0.35);
-}
-
-
-/* ===== 상단 ‘면’ 영역 (선 ❌, 색으로 채움 ⭕) ===== */
-.file-header{
-  height: 52px;
-  border-radius: 22px 22px 0 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.85),
-      rgba(245,246,250,0.65)
-    );
-
-  box-shadow:
-    inset 0 -1px 0 rgba(120,120,120,0.25);
-}
-
-
-/* ===== file 콘텐츠 영역 ===== */
-.file-content{
-  height: calc(100% - 52px);
-  padding: 26px;
 }
