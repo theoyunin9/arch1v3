@@ -64,3 +64,32 @@
     });
   });
 })();
+
+// ===== page transition (fade) =====
+(function () {
+  const root = document.querySelector(".page-fade");
+  if (!root) return;
+
+  // 들어올 때 페이드 인
+  requestAnimationFrame(() => root.classList.add("is-ready"));
+
+  // data-nav 가진 링크는 "페이드 아웃 → 이동"으로 처리
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-nav]");
+    if (!a) return;
+
+    // 새탭/중클/수정키는 기본 동작 유지
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+
+    e.preventDefault();
+    const href = a.getAttribute("href");
+    if (!href) return;
+
+    root.classList.remove("is-ready");
+    root.classList.add("is-leaving");
+
+    setTimeout(() => {
+      location.href = href;
+    }, 260);
+  });
+})();
