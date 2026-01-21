@@ -637,6 +637,13 @@ html.page-enter body{
 .file-window{
   position: relative;
   overflow: hidden;
+
+  /* ✅ 상단 흰 바 높이(= ::before 높이)랑 동일하게 맞추는 변수 */
+  --file-topbar-h: 72px;
+
+  /* ✅ 흰박스 위치(살짝 우측 이동) */
+  --file-bar-left: 17.6%;
+  --file-bar-w: clamp(7px, 0.8vw, 9px);
 }
 
 /* overlay 레이어 */
@@ -651,12 +658,13 @@ html.page-enter body{
 .file-side-bar{
   position: absolute;
 
-  /* 🔧 상단 흰색 바(::before) 바로 아래에서 시작 */
-  top: 72px;                 /* 상단바 높이와 정확히 맞춤 */
-  bottom: 0;                 /* 아래까지 꽉 채움 */
+  /* ✅ 상단바(::before)와 딱 맞닿게 */
+  top: var(--file-topbar-h);
+  height: calc(100% - var(--file-topbar-h));
 
-  left: 17%;                 /* 기존보다 살짝 오른쪽 */
-  width: clamp(7px, 0.8vw, 9px);  /* 조금 더 얇게 */
+  /* ✅ 아주 조금 우측 이동 */
+  left: var(--file-bar-left);
+  width: var(--file-bar-w);
 
   background: rgba(255,255,255,0.78);
 
@@ -672,12 +680,17 @@ html.page-enter body{
 .file-title{
   position: absolute;
 
-  /* 🔧 흰 바 오른쪽 영역의 정중앙 */
-  left: calc(17% + 4px + (100% - 17%) / 2);
-  top: calc(72px + 10%);   /* 기존보다 아주 살짝 아래 */
+  /* ✅ 흰 선 오른쪽 영역 정중앙
+     = (흰선의 오른쪽 끝 ~ file-window 오른쪽 끝)의 가운데 */
+  left: calc(
+    (var(--file-bar-left) + var(--file-bar-w)) +
+    (100% - (var(--file-bar-left) + var(--file-bar-w))) / 2
+  );
+
+  /* ✅ 글씨 아주 조금 상단으로 */
+  top: calc(var(--file-topbar-h) + 9.2%);
 
   transform: translateX(-50%);
-
   white-space: nowrap;
 
   font-size: clamp(64px, 6.8vw, 120px);
@@ -686,9 +699,8 @@ html.page-enter body{
   font-style: italic;
   letter-spacing: 0.3px;
 
-  /* 🔧 색 유지, 두께 살짝 얇게 */
   color: rgba(144, 59, 54, 0.92);
-  font-weight: 500;
+  font-weight: 500; /* ✅ 두께 살짝 얇게 유지 */
 
   /* ❌ 흰색 테두리/광 제거 */
   text-shadow:
@@ -697,19 +709,22 @@ html.page-enter body{
 
   -webkit-text-stroke: 0;
 
-  text-decoration: underline;
+  /* ✅ 밑줄(같은 색) */
+  text-decoration-line: underline;
+  text-decoration-color: rgba(144, 59, 54, 0.92);
   text-decoration-thickness: 5px;
   text-underline-offset: 12px;
 }
 
 /* 세로 화면 보정 */
 @media (max-aspect-ratio: 3/4){
-  .file-title{
-    top: calc(72px + 14%);
-    font-size: clamp(58px, 8vw, 110px);
+  .file-window{
+    --file-topbar-h: 72px;     /* 상단바 높이 쓰는 값 유지 */
+    --file-bar-left: 18.2%;    /* 세로모드에서는 살짝 더 우측 */
   }
 
-  .file-side-bar{
-    left: 18%;
+  .file-title{
+    top: calc(var(--file-topbar-h) + 12.8%);
+    font-size: clamp(58px, 8vw, 110px);
   }
 }
