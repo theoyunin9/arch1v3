@@ -632,13 +632,14 @@ html.page-enter body{
 /* ❌ 상단바 아래 얇은 선 제거됨 (아예 없음) */
 /* .file-window::after 완전 삭제 */
 
-/* ===== file overlay (sidebar + FILE text) : fixed position like reference ===== */
+/* ===== file overlay (sidebar + FILE text) ===== */
 
 .file-window{
   position: relative;
   overflow: hidden;
 }
 
+/* overlay 레이어 */
 .file-overlay{
   position: absolute;
   inset: 0;
@@ -646,63 +647,69 @@ html.page-enter body{
   pointer-events: none;
 }
 
-/* 좌측 흰 박스형 라인 — file-window 높이 꽉 채우기 */
+/* 좌측 흰 박스형 바 */
 .file-side-bar{
   position: absolute;
 
-  left: 16.8%;
-  top: 0;              /* ✅ 위쪽 딱 맞게 */
-  height: 100%;        /* ✅ file-window 안 꽉 채움 */
-  width: clamp(7px, 0.45vw, 9px);
+  /* 🔧 상단 흰색 바(::before) 바로 아래에서 시작 */
+  top: 72px;                 /* 상단바 높이와 정확히 맞춤 */
+  bottom: 0;                 /* 아래까지 꽉 채움 */
+
+  left: 17%;                 /* 기존보다 살짝 오른쪽 */
+  width: clamp(7px, 0.8vw, 9px);  /* 조금 더 얇게 */
 
   background: rgba(255,255,255,0.78);
 
-  border-radius: 2px;
+  /* ✅ 완전 각지게 */
+  border-radius: 0;
 
   box-shadow:
-    0 10px 26px rgba(40,60,120,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.55);
+    0 8px 22px rgba(40,60,120,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.45);
 }
 
 /* FILE 타이틀 */
 .file-title{
   position: absolute;
 
-  /* 흰 선 ~ 오른쪽 끝의 정중앙 */
-  left: calc((16.8% + 100%) / 2);
+  /* 🔧 흰 바 오른쪽 영역의 정중앙 */
+  left: calc(17% + 4px + (100% - 17%) / 2);
+  top: calc(72px + 10%);   /* 기존보다 아주 살짝 아래 */
 
-  top: 11.5%;          /* ✅ 살짝 하단으로 */
   transform: translateX(-50%);
 
-  display: inline-block;
   white-space: nowrap;
 
-  font-size: clamp(72px, 7.8vw, 140px);
+  font-size: clamp(64px, 6.8vw, 120px);
 
   font-family: "Times New Roman", Times, "Georgia", serif;
   font-style: italic;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.3px;
 
-  font-weight: 500;    /* ✅ 조금 더 얇게 */
-
+  /* 🔧 색 유지, 두께 살짝 얇게 */
   color: rgba(144, 59, 54, 0.92);
+  font-weight: 500;
 
-  /* ✅ 흰색 테두리/그림자 제거 */
+  /* ❌ 흰색 테두리/광 제거 */
   text-shadow:
-    0 6px 18px rgba(144,59,54,0.22),
-    0 10px 22px rgba(90,30,25,0.18);
+    0 6px 16px rgba(144,59,54,0.18),
+    0 10px 22px rgba(90,30,25,0.14);
 
-  -webkit-text-stroke: 0.35px rgba(90,30,25,0.22);
+  -webkit-text-stroke: 0;
 
   text-decoration: underline;
-  text-decoration-thickness: 6px;
+  text-decoration-thickness: 5px;
   text-underline-offset: 12px;
 }
 
-/* 세로모드 보정 */
+/* 세로 화면 보정 */
 @media (max-aspect-ratio: 3/4){
   .file-title{
-    top: 13%;
-    left: calc((16.8% + 100%) / 2);
+    top: calc(72px + 14%);
+    font-size: clamp(58px, 8vw, 110px);
+  }
+
+  .file-side-bar{
+    left: 18%;
   }
 }
