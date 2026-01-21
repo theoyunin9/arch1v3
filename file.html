@@ -19,7 +19,13 @@
 
   <main class="stage">
     <!-- ✅ 메인과 동일한 외곽 창 -->
-    <section class="main-window file-window" aria-label="file window"></section>
+    <section class="main-window file-window" aria-label="file window">
+  <!-- overlay (왼쪽 흰 바 + FILE 텍스트) -->
+  <div class="file-overlay" aria-hidden="true">
+    <div class="file-side-bar"></div>
+    <div class="file-title">FILE</div>
+  </div>
+</section>
 
     </section>
   </main>
