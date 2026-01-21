@@ -577,3 +577,27 @@ html.page-enter body{
     opacity: 1; transform: none; filter: none;
   }
 }
+
+
+/* ===== file.html window skin (same size as .main-window) ===== */
+.file-window{
+  /* 메인창 동일 크기/위치 유지, 색만 변경 */
+  background: rgba(139,144,157,0.22);             /* #8b909d 느낌 */
+  border: 1.4px solid rgba(255,255,255,0.28);
+
+  box-shadow:
+    0 24px 60px rgba(40,60,120,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.55);
+}
+
+/* ✅ 맨 위 흰 줄 1개 (너가 말한 3번째 사진 느낌) */
+.file-window::before{
+  content:"";
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 58px; /* “창 맨 위쪽” 느낌으로 적당히. 더 위/아래 원하면 숫자만 조절 */
+  height: 1px;
+  background: rgba(255,255,255,0.9);
+  opacity: 0.9;
+}
