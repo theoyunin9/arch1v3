@@ -98,7 +98,7 @@
       html.classList.add("page-leave");
       setTimeout(() => {
         location.href = href;
-      }, 420); // ✅ CSS transition이랑 맞춰서 (opacity .42s)
+      }, 600); // ✅ CSS transition이랑 맞춰서 (opacity .42s)
     });
   })();
 
