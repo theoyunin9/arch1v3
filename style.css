@@ -646,31 +646,32 @@ html.page-enter body{
   pointer-events: none;
 }
 
-/* 좌측 흰 박스형 라인 (조금 더 얇게 + 조금 더 오른쪽 + 더 각지게) */
+/* 좌측 흰 박스형 라인 — file-window 높이 꽉 채우기 */
 .file-side-bar{
   position: absolute;
 
-  left: 16.8%;                  /* ✅ 조금 더 오른쪽 */
-  top: 16.5%;
-  width: clamp(7px, 0.45vw, 9px); /* ✅ 조금 더 얇게 */
-  height: 78%;
+  left: 16.8%;
+  top: 0;              /* ✅ 위쪽 딱 맞게 */
+  height: 100%;        /* ✅ file-window 안 꽉 채움 */
+  width: clamp(7px, 0.45vw, 9px);
 
   background: rgba(255,255,255,0.78);
 
-  border-radius: 2px;           /* ✅ 모서리 더 각지게(살짝만) */
+  border-radius: 2px;
 
   box-shadow:
     0 10px 26px rgba(40,60,120,0.10),
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* FILE 타이틀: "흰 선 ~ 오른쪽 끝" 구간의 정중앙에 고정 */
+/* FILE 타이틀 */
 .file-title{
   position: absolute;
 
-  /* ✅ 오른쪽 칸 중앙 = (dividerX + 100%) / 2  */
+  /* 흰 선 ~ 오른쪽 끝의 정중앙 */
   left: calc((16.8% + 100%) / 2);
-  top: 9%;
+
+  top: 11.5%;          /* ✅ 살짝 하단으로 */
   transform: translateX(-50%);
 
   display: inline-block;
@@ -682,30 +683,26 @@ html.page-enter body{
   font-style: italic;
   letter-spacing: 0.4px;
 
-  font-weight: 600; /* ✅ 조금만 더 얇게 */
+  font-weight: 500;    /* ✅ 조금 더 얇게 */
 
   color: rgba(144, 59, 54, 0.92);
 
+  /* ✅ 흰색 테두리/그림자 제거 */
   text-shadow:
-    0 1px 0 rgba(255,255,255,0.55),
     0 6px 18px rgba(144,59,54,0.22),
     0 10px 22px rgba(90,30,25,0.18);
 
-  -webkit-text-stroke: 0.5px rgba(90,30,25,0.22); /* ✅ 살짝만 얇게 */
+  -webkit-text-stroke: 0.35px rgba(90,30,25,0.22);
 
   text-decoration: underline;
   text-decoration-thickness: 6px;
   text-underline-offset: 12px;
 }
 
-/* 세로모드 보정 (같은 로직으로 중앙 유지) */
+/* 세로모드 보정 */
 @media (max-aspect-ratio: 3/4){
-  .file-side-bar{
-    top: 20%;
-    height: 68%;
-  }
   .file-title{
-    top: 10.5%;
+    top: 13%;
     left: calc((16.8% + 100%) / 2);
   }
 }
