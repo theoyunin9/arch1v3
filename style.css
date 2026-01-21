@@ -551,3 +551,18 @@ body{
 .bottom-search input::placeholder{
   color: rgba(110,143,242,0.55);
 }
+
+/* ===== page transition (fade) ===== */
+.page-fade{
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.page-fade.is-ready{
+  opacity: 1;
+}
+
+.page-fade.is-leaving{
+  opacity: 0;
+  pointer-events: none;
+}
