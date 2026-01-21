@@ -51,33 +51,55 @@
     const tick = () => {
       if (i >= text.length) return done?.();
       const ch = text[i++];
+      el.appendChild(makeCharSpan(ch));
+      setTimeout(tick, delayFor(ch));
+    };
+    tick();
+  }
 
-
-// ===== page transition (single, clean) =====
-(function () {
-  const html = document.documentElement;
-
-  // 들어올 때
-  html.classList.add("page-enter");
-  requestAnimationFrame(() => {
-    html.classList.remove("page-enter");
+  // ✅ 실행: FRONT → SEP → BACK
+  typeTo(frontEl, FRONT, () => {
+    typeTo(sepEl, SEP, () => {
+      typeTo(backEl, BACK);
+    });
   });
 
-  // data-nav 붙은 링크만 전환 적용
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest("a[data-nav]");
-    if (!a) return;
+  // ===== page transition (single, clean) =====
+  (function () {
+    const html = document.documentElement;
 
-    // 새탭 / 수정키 / 중클릭은 기본 동작 유지
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+    // 들어올 때 (iOS 포함: pageshow도 같이 처리)
+    const enterDone = () => {
+      requestAnimationFrame(() => {
+        html.classList.remove("page-enter");
+      });
+    };
 
-    e.preventDefault();
-    const href = a.getAttribute("href");
-    if (!href) return;
+    // html에 class="page-enter"를 이미 달아두면 더 안정적이긴 한데,
+    // 지금 구조 유지하면서도 보이게 하려고 여기서도 한번 걸어줌
+    html.classList.add("page-enter");
+    window.addEventListener("pageshow", enterDone);
+    document.addEventListener("DOMContentLoaded", enterDone);
 
-    html.classList.add("page-leave");
-    setTimeout(() => {
-      location.href = href;
-    }, 220);
-  });
+    // data-nav 붙은 링크만 전환 적용
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[data-nav]");
+      if (!a) return;
+
+      // 새탭 / 수정키 / 중클릭은 기본 동작 유지
+      if (a.target === "_blank") return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+
+      const href = a.getAttribute("href");
+      if (!href || href.startsWith("#")) return;
+
+      e.preventDefault();
+
+      html.classList.add("page-leave");
+      setTimeout(() => {
+        location.href = href;
+      }, 420); // ✅ CSS transition이랑 맞춰서 (opacity .42s)
+    });
+  })();
+
 })();
