@@ -653,11 +653,10 @@ html.page-enter body{
   position: absolute;
 
   /* ✅ 어떤 화면에서도 2짤 느낌으로 고정: % 기준 */
-  left: 7.5%;
-  top: 18%;
-
-  width: clamp(14px, 1.6vw, 20px);
-  height: 70%;
+  left: 15%;                 /* 오른쪽으로 2배 */
+  top: 16.5%;                /* 위/아래 여백 맞추려고 살짝 위로 */
+  width: clamp(8px, 0.6vw, 11px); /* 폭을 대략 60%로 */
+  height: 78%;               /* 위아래로 같은 픽셀만큼 “살짝” 늘린 느낌 */
 
   background: rgba(255,255,255,0.78);
 
@@ -681,13 +680,16 @@ html.page-enter body{
   display: inline-block;
   white-space: nowrap;
 
-  /* ✅ 화면마다 비슷하게 보이게: 반응형 글자크기 */
-  font-size: clamp(56px, 6.2vw, 110px);
+  /* ✅ 더 크게 */
+  font-size: clamp(72px, 7.8vw, 140px);
 
   /* ARCHIV3D랑 동일 계열 */
   font-family: "Times New Roman", Times, "Georgia", serif;
   font-style: italic;
   letter-spacing: 0.4px;
+
+  /* ✅ 더 두껍게 */
+  font-weight: 700;
 
   /* 색 */
   color: rgba(144, 59, 54, 0.92); /* #903b36 */
@@ -698,7 +700,8 @@ html.page-enter body{
     0 6px 18px rgba(144,59,54,0.22),
     0 10px 22px rgba(90,30,25,0.18);
 
-  -webkit-text-stroke: 0.3px rgba(90,30,25,0.18);
+  /* ✅ 스트로크도 조금 더 */
+  -webkit-text-stroke: 0.6px rgba(90,30,25,0.22);
 
   /* 밑줄 */
   text-decoration: underline;
