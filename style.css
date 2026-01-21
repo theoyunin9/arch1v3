@@ -632,13 +632,15 @@ html.page-enter body{
 /* ❌ 상단바 아래 얇은 선 제거됨 (아예 없음) */
 /* .file-window::after 완전 삭제 */
 
-/* ===== FILE overlay (position fix) ===== */
+/* ===== file overlay (sidebar + FILE text) : fixed position like reference ===== */
+
+/* file-window가 기준이 되게 */
 .file-window{
-  position: relative; /* overlay 기준 잡기 */
-  --file-inset: 32px; /* 너가 쓰던 inset이 있으면 이 값만 맞춰 */
-  --file-topbar-h: 44px; /* 상단바 두께(72px의 60% 정도) */
+  position: relative;
+  overflow: hidden; /* 밖으로 삐져나오면 잘라버림 */
 }
 
+/* overlay는 창 전체를 덮는 투명 레이어 */
 .file-overlay{
   position: absolute;
   inset: 0;
@@ -646,69 +648,72 @@ html.page-enter body{
   pointer-events: none;
 }
 
-/* ===== FILE overlay (position fixed inside file-window) ===== */
-.file-window{ position: relative; } /* 혹시 없으면 꼭 필요 */
-
-.file-overlay{
-  position: absolute;
-  inset: 0;                 /* 창 기준으로 꽉 */
-  pointer-events: none;     /* 클릭 방해 X */
-  z-index: 20;              /* ::before(상단면) 위로 */
-}
-
-/* ===== FILE title (ARCHIV3D 느낌 유지 + 크기/위치 고정) ===== */
-.file-title{
-  position: absolute;
-
-  /* ✅ “어떤 화면에서도 같은 자리” = % + clamp */
-  left: 63%;                          /* 2짤처럼 살짝 오른쪽 */
-  top: clamp(18px, 4.2vh, 40px);      /* 상단에서 내려오는 정도 */
-  transform: translateX(-50%) skewX(-10deg); /* 기울임 느낌 */
-
-  display: inline-block;
-  white-space: nowrap;
-
-  /* ARCHIV3D랑 같은 계열 */
-  font-family: "Times New Roman", Times, "Georgia", serif;
-  font-style: italic;
-  letter-spacing: 0.4px;
-
-  /* ✅ 크기: 화면 따라 커졌다 작아졌다 */
-  font-size: clamp(56px, 6.2vw, 92px);
-
-  color: rgba(144, 59, 54, 0.95); /* #903b36 */
-
-  /* 질감/입체감 (ARCHIV3D 느낌) */
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.55),
-    0 8px 22px rgba(144,59,54,0.22),
-    0 14px 34px rgba(90,30,25,0.18);
-
-  -webkit-text-stroke: 0.35px rgba(90,30,25,0.18);
-
-  /* 밑줄 */
-  text-decoration: underline;
-  text-decoration-thickness: clamp(4px, 0.55vw, 7px);
-  text-underline-offset: clamp(8px, 1.1vh, 14px);
-}
-
-/* ===== 좌측 흰 “박스형” 라인 (끝 둥글게 X, 모서리만 살짝) ===== */
+/* 좌측 흰 박스형 라인 (각지고, 모서리만 아주 살짝) */
 .file-side-bar{
   position: absolute;
 
-  /* 2짤처럼 왼쪽에 고정 */
-  left: clamp(20px, 4.5vw, 44px);
-  top: clamp(110px, 18vh, 170px);
+  /* ✅ 어떤 화면에서도 2짤 느낌으로 고정: % 기준 */
+  left: 7.5%;
+  top: 18%;
 
-  width: clamp(14px, 1.2vw, 20px);
-  height: clamp(240px, 62vh, 560px);
+  width: clamp(14px, 1.6vw, 20px);
+  height: 70%;
 
-  background: rgba(255,255,255,0.86);
+  background: rgba(255,255,255,0.78);
 
-  /* ✅ 끝 동그랗게(캡) 금지 → 각지게 + 모서리만 살짝 */
+  /* 끝 둥글게 X, 모서리만 살짝 */
   border-radius: 3px;
 
   box-shadow:
     0 10px 26px rgba(40,60,120,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.65);
+    inset 0 1px 0 rgba(255,255,255,0.55);
+}
+
+/* FILE 타이틀 (2짤처럼 상단 중앙-우측 느낌 고정 + 크기 키움) */
+.file-title{
+  position: absolute;
+
+  /* ✅ “2짤 위치”를 %로 박아버림 */
+  left: 63%;
+  top: 9%;
+  transform: translateX(-50%);
+
+  display: inline-block;
+  white-space: nowrap;
+
+  /* ✅ 화면마다 비슷하게 보이게: 반응형 글자크기 */
+  font-size: clamp(56px, 6.2vw, 110px);
+
+  /* ARCHIV3D랑 동일 계열 */
+  font-family: "Times New Roman", Times, "Georgia", serif;
+  font-style: italic;
+  letter-spacing: 0.4px;
+
+  /* 색 */
+  color: rgba(144, 59, 54, 0.92); /* #903b36 */
+
+  /* 질감/안개 느낌 */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.55),
+    0 6px 18px rgba(144,59,54,0.22),
+    0 10px 22px rgba(90,30,25,0.18);
+
+  -webkit-text-stroke: 0.3px rgba(90,30,25,0.18);
+
+  /* 밑줄 */
+  text-decoration: underline;
+  text-decoration-thickness: 6px;
+  text-underline-offset: 12px;
+}
+
+/* (선택) 세로모드에서 FILE이 너무 위로 뜨면 살짝 보정 */
+@media (max-aspect-ratio: 3/4){
+  .file-title{
+    top: 10.5%;
+    left: 62%;
+  }
+  .file-side-bar{
+    top: 20%;
+    height: 68%;
+  }
 }
