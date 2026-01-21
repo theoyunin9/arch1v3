@@ -590,28 +590,10 @@ html.page-enter body{
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* ❌ 1px 흰 선 제거 (네가 원하는 건 '선'이 아니라 '상단 면') */
-/*
-.file-window::before{
-  content:"";
-  position:absolute;
-  left: 0;
-  right: 0;
-  top: 58px;
-  height: 1px;
-  background: rgba(255,255,255,0.9);
-  opacity: 0.9;
-}
-*/
-
-
 /* ===== file.html : SINGLE window (no double layer) ===== */
-/* 핵심: file-inner-window를 없애고, file-window 하나에서
-   (1) 상단 흰 바  (2) 아래 블루그레이 면 을 직접 그려줌 */
+/* file-window 하나로 상단 흰 면 + 아래 블루그레이 면 처리 */
 
 .file-window{
-  /* 메인창 질감/크기는 .main-window가 이미 다 해줌
-     여기서는 "색감"만 file 전용으로 덮어쓰기 */
   background: linear-gradient(
     180deg,
     rgba(255,255,255,0.28) 0%,
@@ -628,33 +610,25 @@ html.page-enter body{
     inset 0 1px 0 rgba(255,255,255,0.55);
 }
 
-/* 상단 흰 "면" */
+/* 상단 흰 "면" (선 X, 완전 면) */
 .file-window::before{
   content:"";
   position:absolute;
   left: 0;
   right: 0;
   top: 0;
-  height: 72px; /* 상단바 높이 (원하면 64~78 사이로 조절) */
+  height: 72px; /* 상단바 높이 */
 
   background: rgba(255,255,255,0.70);
 
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
 
-  /* 아래쪽 경계 느낌 살짝 */
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.55);
+  /* ❗ 회색 얇은 선의 원인이던 그림자 제거 */
+  box-shadow: none;
+
   pointer-events: none;
 }
 
-/* 상단바 아래 경계선(아주 얇게) */
-.file-window::after{
-  content:"";
-  position:absolute;
-  left: 0;
-  right: 0;
-  top: 72px;     /* ::before 높이랑 동일 */
-  height: 1px;
-  background: rgba(255,255,255,0.35);
-  pointer-events: none;
-}
+/* ❌ 상단바 아래 얇은 선 제거됨 (아예 없음) */
+/* .file-window::after 완전 삭제 */
