@@ -552,17 +552,28 @@ body{
   color: rgba(110,143,242,0.55);
 }
 
-/* ===== page transition (fade) ===== */
-.page-fade{
-  opacity: 0;
-  transition: opacity 260ms ease;
+/* ===== page transition ===== */
+body{
+  transition: opacity .22s ease, transform .22s ease, filter .22s ease;
 }
 
-.page-fade.is-ready{
-  opacity: 1;
+/* 나갈 때(클릭 후) */
+html.page-leave body{
+  opacity: 0;
+  transform: translateY(6px);
+  filter: blur(1px);
 }
 
-.page-fade.is-leaving{
+/* (선택) 들어올 때 */
+html.page-enter body{
   opacity: 0;
-  pointer-events: none;
+  transform: translateY(6px);
+  filter: blur(1px);
+}
+
+@media (prefers-reduced-motion: reduce){
+  body{ transition: none; }
+  html.page-leave body, html.page-enter body{
+    opacity: 1; transform: none; filter: none;
+  }
 }
