@@ -632,12 +632,26 @@ html.page-enter body{
 /* ❌ 상단바 아래 얇은 선 제거됨 (아예 없음) */
 /* .file-window::after 완전 삭제 */
 
-/* ===== FILE title (ARCHIV3D 스타일 그대로 이식) ===== */
+/* ===== FILE overlay (position fix) ===== */
+.file-window{
+  position: relative; /* overlay 기준 잡기 */
+  --file-inset: 32px; /* 너가 쓰던 inset이 있으면 이 값만 맞춰 */
+  --file-topbar-h: 44px; /* 상단바 두께(72px의 60% 정도) */
+}
 
+.file-overlay{
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* ===== FILE title (ARCHIV3D 스타일 이식 + 위치 고정) ===== */
 .file-title{
   position: absolute;
-  top: calc(var(--file-topbar-h) + 34px);
-  left: calc(var(--file-inset) + 180px);
+  top: 18px;          /* 상단바 안쪽에 안정적으로 */
+  left: 56%;          /* 살짝 오른쪽으로(샘플 느낌) */
+  transform: translateX(-50%);
 
   display: inline-block;
   white-space: nowrap;
@@ -647,19 +661,15 @@ html.page-enter body{
   font-style: italic;
   letter-spacing: 0.4px;
 
-  /* 색만 FILE 전용으로 변경 */
-  color: rgba(144, 59, 54, 0.92); /* #903b36 계열 */
+  color: rgba(144, 59, 54, 0.92); /* #903b36 */
 
-  /* 유리/안개 질감 텍스트 */
   text-shadow:
     0 1px 0 rgba(255,255,255,0.55),
     0 6px 18px rgba(144,59,54,0.22),
     0 10px 22px rgba(90,30,25,0.18);
 
-  /* 살짝 또렷하게 */
   -webkit-text-stroke: 0.3px rgba(90,30,25,0.18);
 
-  /* 밑줄 */
   text-decoration: underline;
   text-decoration-thickness: 5px;
   text-underline-offset: 10px;
@@ -667,16 +677,17 @@ html.page-enter body{
   font-size: 54px;
 }
 
-/* ===== 좌측 흰 박스형 라인 ===== */
+/* ===== 좌측 흰 박스형 라인 (각지게 + 모서리만 살짝) ===== */
 .file-side-bar{
   position: absolute;
   left: var(--file-inset);
-  top: 120px;
+  top: calc(var(--file-topbar-h) + 44px); /* 상단바 아래부터 시작 */
+  bottom: 64px;                           /* 아래 여백 남기기 */
+
   width: 18px;
-  height: 68%;
 
   background: rgba(255,255,255,0.85);
-  border-radius: 10px;
+  border-radius: 3px; /* 끝 둥글게 X, 모서리만 아주 살짝 */
 
   box-shadow:
     0 10px 26px rgba(40,60,120,0.10),
