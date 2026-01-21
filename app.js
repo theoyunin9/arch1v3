@@ -51,27 +51,33 @@
     const tick = () => {
       if (i >= text.length) return done?.();
       const ch = text[i++];
-// ===== page transition nav =====
-document.documentElement.classList.add('page-enter');
-window.addEventListener('DOMContentLoaded', () => {
-  // 다음 프레임에 enter 제거(페이드인)
+
+
+// ===== page transition (single, clean) =====
+(function () {
+  const html = document.documentElement;
+
+  // 들어올 때
+  html.classList.add("page-enter");
   requestAnimationFrame(() => {
-    document.documentElement.classList.remove('page-enter');
+    html.classList.remove("page-enter");
   });
 
-  // 메뉴 링크들: # 아닌 것만 전환 적용
-  document.querySelectorAll('a.menu-item').forEach((a) => {
-    const href = a.getAttribute('href');
-    if (!href || href.startsWith('#')) return;
+  // data-nav 붙은 링크만 전환 적용
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-nav]");
+    if (!a) return;
 
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      const url = a.href;
+    // 새탭 / 수정키 / 중클릭은 기본 동작 유지
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
 
-      document.documentElement.classList.add('page-leave');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 220);
-    });
+    e.preventDefault();
+    const href = a.getAttribute("href");
+    if (!href) return;
+
+    html.classList.add("page-leave");
+    setTimeout(() => {
+      location.href = href;
+    }, 220);
   });
-});
+})();
