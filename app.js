@@ -103,3 +103,20 @@
   })();
 
 })();
+
+// ===== fix: iOS/Safari back button blank (bfcache) =====
+(() => {
+  const html = document.documentElement;
+
+  const resetTransition = () => {
+    html.classList.remove("page-leave", "page-enter");
+  };
+
+  // 뒤로가기/앞으로가기(bfcache 복원 포함) 때 무조건 복구
+  window.addEventListener("pageshow", resetTransition);
+
+  // 탭 전환/복귀에서도 혹시 남아있으면 복구
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) resetTransition();
+  });
+})();
