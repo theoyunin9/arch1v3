@@ -631,3 +631,54 @@ html.page-enter body{
 
 /* ❌ 상단바 아래 얇은 선 제거됨 (아예 없음) */
 /* .file-window::after 완전 삭제 */
+
+/* ===== FILE title (ARCHIV3D 스타일 그대로 이식) ===== */
+
+.file-title{
+  position: absolute;
+  top: calc(var(--file-topbar-h) + 34px);
+  left: calc(var(--file-inset) + 180px);
+
+  display: inline-block;
+  white-space: nowrap;
+
+  /* ARCHIV3D랑 동일 */
+  font-family: "Times New Roman", Times, "Georgia", serif;
+  font-style: italic;
+  letter-spacing: 0.4px;
+
+  /* 색만 FILE 전용으로 변경 */
+  color: rgba(144, 59, 54, 0.92); /* #903b36 계열 */
+
+  /* 유리/안개 질감 텍스트 */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.55),
+    0 6px 18px rgba(144,59,54,0.22),
+    0 10px 22px rgba(90,30,25,0.18);
+
+  /* 살짝 또렷하게 */
+  -webkit-text-stroke: 0.3px rgba(90,30,25,0.18);
+
+  /* 밑줄 */
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+  text-underline-offset: 10px;
+
+  font-size: 54px;
+}
+
+/* ===== 좌측 흰 박스형 라인 ===== */
+.file-side-bar{
+  position: absolute;
+  left: var(--file-inset);
+  top: 120px;
+  width: 18px;
+  height: 68%;
+
+  background: rgba(255,255,255,0.85);
+  border-radius: 10px;
+
+  box-shadow:
+    0 10px 26px rgba(40,60,120,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.65);
+}
