@@ -554,7 +554,7 @@ body{
 
 /* ===== page transition ===== */
 body{
-  transition: opacity .22s ease, transform .22s ease, filter .22s ease;
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
 }
 
 /* 나갈 때(클릭 후) */
