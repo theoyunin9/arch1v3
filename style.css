@@ -646,48 +646,67 @@ html.page-enter body{
   pointer-events: none;
 }
 
-/* ===== FILE title (ARCHIV3D 스타일 이식 + 위치 고정) ===== */
+/* ===== FILE overlay (position fixed inside file-window) ===== */
+.file-window{ position: relative; } /* 혹시 없으면 꼭 필요 */
+
+.file-overlay{
+  position: absolute;
+  inset: 0;                 /* 창 기준으로 꽉 */
+  pointer-events: none;     /* 클릭 방해 X */
+  z-index: 20;              /* ::before(상단면) 위로 */
+}
+
+/* ===== FILE title (ARCHIV3D 느낌 유지 + 크기/위치 고정) ===== */
 .file-title{
   position: absolute;
-  top: 18px;          /* 상단바 안쪽에 안정적으로 */
-  left: 56%;          /* 살짝 오른쪽으로(샘플 느낌) */
-  transform: translateX(-50%);
+
+  /* ✅ “어떤 화면에서도 같은 자리” = % + clamp */
+  left: 63%;                          /* 2짤처럼 살짝 오른쪽 */
+  top: clamp(18px, 4.2vh, 40px);      /* 상단에서 내려오는 정도 */
+  transform: translateX(-50%) skewX(-10deg); /* 기울임 느낌 */
 
   display: inline-block;
   white-space: nowrap;
 
-  /* ARCHIV3D랑 동일 */
+  /* ARCHIV3D랑 같은 계열 */
   font-family: "Times New Roman", Times, "Georgia", serif;
   font-style: italic;
   letter-spacing: 0.4px;
 
-  color: rgba(144, 59, 54, 0.92); /* #903b36 */
+  /* ✅ 크기: 화면 따라 커졌다 작아졌다 */
+  font-size: clamp(56px, 6.2vw, 92px);
 
+  color: rgba(144, 59, 54, 0.95); /* #903b36 */
+
+  /* 질감/입체감 (ARCHIV3D 느낌) */
   text-shadow:
     0 1px 0 rgba(255,255,255,0.55),
-    0 6px 18px rgba(144,59,54,0.22),
-    0 10px 22px rgba(90,30,25,0.18);
+    0 8px 22px rgba(144,59,54,0.22),
+    0 14px 34px rgba(90,30,25,0.18);
 
-  -webkit-text-stroke: 0.3px rgba(90,30,25,0.18);
+  -webkit-text-stroke: 0.35px rgba(90,30,25,0.18);
 
+  /* 밑줄 */
   text-decoration: underline;
-  text-decoration-thickness: 5px;
-  text-underline-offset: 10px;
-
-  font-size: 54px;
+  text-decoration-thickness: clamp(4px, 0.55vw, 7px);
+  text-underline-offset: clamp(8px, 1.1vh, 14px);
 }
 
-/* ===== 좌측 흰 박스형 라인 (각지게 + 모서리만 살짝) ===== */
+/* ===== 좌측 흰 “박스형” 라인 (끝 둥글게 X, 모서리만 살짝) ===== */
 .file-side-bar{
   position: absolute;
-  left: var(--file-inset);
-  top: calc(var(--file-topbar-h) + 44px); /* 상단바 아래부터 시작 */
-  bottom: 64px;                           /* 아래 여백 남기기 */
 
-  width: 18px;
+  /* 2짤처럼 왼쪽에 고정 */
+  left: clamp(20px, 4.5vw, 44px);
+  top: clamp(110px, 18vh, 170px);
 
-  background: rgba(255,255,255,0.85);
-  border-radius: 3px; /* 끝 둥글게 X, 모서리만 아주 살짝 */
+  width: clamp(14px, 1.2vw, 20px);
+  height: clamp(240px, 62vh, 560px);
+
+  background: rgba(255,255,255,0.86);
+
+  /* ✅ 끝 동그랗게(캡) 금지 → 각지게 + 모서리만 살짝 */
+  border-radius: 3px;
 
   box-shadow:
     0 10px 26px rgba(40,60,120,0.10),
