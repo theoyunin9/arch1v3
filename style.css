@@ -617,7 +617,7 @@ html.page-enter body{
   left: 0;
   right: 0;
   top: 0;
-  height: 72px; /* 상단바 높이 */
+  height: 44px; /* 상단바 높이 */
 
   background: rgba(255,255,255,0.70);
 
