@@ -638,24 +638,20 @@ html.page-enter body{
   position: relative;
   overflow: hidden;
 
-  /* ✅ 상단 흰 바 높이: 여기만 바꾸면 전부 같이 맞춰짐 */
-  --file-topbar-h: 44px;   /* ← 너 스샷에 보이던 상단바 height가 44px로 보였음 */
+  --file-topbar-h: 44px;
   --file-bar-left: 17.8%;
-  --file-bar-w: clamp(6px, 0.65vw, 8px); /* ✅ 흰 박스 조금 더 얇게 */
+  --file-bar-w: clamp(6px, 0.65vw, 8px);
 }
 
-/* ✅ 상단 흰 바(::before)도 같은 변수로 맞춰서 “틈” 없애기 */
 .file-window::before{
   content:"";
   position:absolute;
   left:0; right:0; top:0;
   height: var(--file-topbar-h);
-  /* 기존 상단바 스타일 유지중이면 background만 놔두고 height만 바꿔도 됨 */
   background: rgba(255,255,255,0.55);
   z-index: 5;
 }
 
-/* overlay 레이어 */
 .file-overlay{
   position: absolute;
   inset: 0;
@@ -663,11 +659,8 @@ html.page-enter body{
   pointer-events: none;
 }
 
-/* 좌측 흰 박스형 바 */
 .file-side-bar{
   position: absolute;
-
-  /* ✅ 상단바랑 딱 맞닿게(간격 제거) */
   top: var(--file-topbar-h);
   height: calc(100% - var(--file-topbar-h));
 
@@ -682,17 +675,15 @@ html.page-enter body{
     inset 0 1px 0 rgba(255,255,255,0.45);
 }
 
-/* FILE 타이틀 */
 .file-title{
   position: absolute;
 
-  /* ✅ 흰 선 오른쪽 영역 정중앙 */
   left: calc(
     (var(--file-bar-left) + var(--file-bar-w)) +
     (100% - (var(--file-bar-left) + var(--file-bar-w))) / 2
   );
 
-  top: calc(var(--file-topbar-h) + 9.0%); /* 살짝 위로(원하면 8.7%처럼 더 올려도 됨) */
+  top: calc(var(--file-topbar-h) + 9.0%);
   transform: translateX(-50%);
 
   display: inline-block;
@@ -707,7 +698,6 @@ html.page-enter body{
   color: rgba(144, 59, 54, 0.92);
   font-weight: 500;
 
-  /* ✅ 그림자 조금 더 세게 */
   text-shadow:
     0 8px 20px rgba(144,59,54,0.26),
     0 14px 28px rgba(90,30,25,0.20);
@@ -715,30 +705,17 @@ html.page-enter body{
   -webkit-text-stroke: 0;
 }
 
-/* ✅ 밑줄 “무조건” 뜨게: 브라우저가 text-decoration 씹으면 이게 대신 보여줌 */
-.file-title::after{
-  content:"";
-  position:absolute;
-  left: 2%;
-  right: 2%;
-  height: 5px;
-  background: rgba(144, 59, 54, 0.92);
-  bottom: -12px;          /* 밑줄 위치 */
-  border-radius: 2px;     /* 밑줄만 살짝 부드럽게 (싫으면 0으로) */
-}
-
-/* 배경 그라데이션: 조금 더 진하게 + 하단만 살짝 어둡게 */
+/* 배경 그라데이션 */
 .file-window{
   background: linear-gradient(
     180deg,
     rgba(245,250,255,0.40) 0%,
     rgba(205,224,245,0.55) 24%,
     rgba(175,206,235,0.62) 55%,
-    rgba(145,186,220,0.72) 100%  /* ✅ 하단 더 어두운 기운 */
+    rgba(145,186,220,0.72) 100%
   );
 }
 
-/* 세로 화면 보정 */
 @media (max-aspect-ratio: 3/4){
   .file-window{
     --file-topbar-h: 44px;
