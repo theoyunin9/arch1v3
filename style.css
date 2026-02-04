@@ -638,12 +638,21 @@ html.page-enter body{
   position: relative;
   overflow: hidden;
 
-  /* ✅ 상단 흰 바 높이(= ::before 높이)랑 동일하게 맞추는 변수 */
-  --file-topbar-h: 72px;
+  /* ✅ 상단 흰 바 높이: 여기만 바꾸면 전부 같이 맞춰짐 */
+  --file-topbar-h: 44px;   /* ← 너 스샷에 보이던 상단바 height가 44px로 보였음 */
+  --file-bar-left: 17.8%;
+  --file-bar-w: clamp(6px, 0.65vw, 8px); /* ✅ 흰 박스 조금 더 얇게 */
+}
 
-  /* ✅ 흰박스 위치(살짝 우측 이동) */
-  --file-bar-left: 17.6%;
-  --file-bar-w: clamp(7px, 0.8vw, 9px);
+/* ✅ 상단 흰 바(::before)도 같은 변수로 맞춰서 “틈” 없애기 */
+.file-window::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0;
+  height: var(--file-topbar-h);
+  /* 기존 상단바 스타일 유지중이면 background만 놔두고 height만 바꿔도 됨 */
+  background: rgba(255,255,255,0.55);
+  z-index: 5;
 }
 
 /* overlay 레이어 */
@@ -658,17 +667,14 @@ html.page-enter body{
 .file-side-bar{
   position: absolute;
 
-  /* ✅ 상단바(::before)와 딱 맞닿게 */
+  /* ✅ 상단바랑 딱 맞닿게(간격 제거) */
   top: var(--file-topbar-h);
   height: calc(100% - var(--file-topbar-h));
 
-  /* ✅ 아주 조금 우측 이동 */
   left: var(--file-bar-left);
   width: var(--file-bar-w);
 
   background: rgba(255,255,255,0.78);
-
-  /* ✅ 완전 각지게 */
   border-radius: 0;
 
   box-shadow:
@@ -680,17 +686,16 @@ html.page-enter body{
 .file-title{
   position: absolute;
 
-  /* ✅ 흰 선 오른쪽 영역 정중앙
-     = (흰선의 오른쪽 끝 ~ file-window 오른쪽 끝)의 가운데 */
+  /* ✅ 흰 선 오른쪽 영역 정중앙 */
   left: calc(
     (var(--file-bar-left) + var(--file-bar-w)) +
     (100% - (var(--file-bar-left) + var(--file-bar-w))) / 2
   );
 
-  /* ✅ 글씨 아주 조금 상단으로 */
-  top: calc(var(--file-topbar-h) + 9.2%);
-
+  top: calc(var(--file-topbar-h) + 9.0%); /* 살짝 위로(원하면 8.7%처럼 더 올려도 됨) */
   transform: translateX(-50%);
+
+  display: inline-block;
   white-space: nowrap;
 
   font-size: clamp(64px, 6.8vw, 120px);
@@ -700,31 +705,47 @@ html.page-enter body{
   letter-spacing: 0.3px;
 
   color: rgba(144, 59, 54, 0.92);
-  font-weight: 500; /* ✅ 두께 살짝 얇게 유지 */
+  font-weight: 500;
 
-  /* ❌ 흰색 테두리/광 제거 */
+  /* ✅ 그림자 조금 더 세게 */
   text-shadow:
-    0 6px 16px rgba(144,59,54,0.18),
-    0 10px 22px rgba(90,30,25,0.14);
+    0 8px 20px rgba(144,59,54,0.26),
+    0 14px 28px rgba(90,30,25,0.20);
 
   -webkit-text-stroke: 0;
+}
 
-  /* ✅ 밑줄(같은 색) */
-  text-decoration-line: underline;
-  text-decoration-color: rgba(144, 59, 54, 0.92);
-  text-decoration-thickness: 5px;
-  text-underline-offset: 12px;
+/* ✅ 밑줄 “무조건” 뜨게: 브라우저가 text-decoration 씹으면 이게 대신 보여줌 */
+.file-title::after{
+  content:"";
+  position:absolute;
+  left: 2%;
+  right: 2%;
+  height: 5px;
+  background: rgba(144, 59, 54, 0.92);
+  bottom: -12px;          /* 밑줄 위치 */
+  border-radius: 2px;     /* 밑줄만 살짝 부드럽게 (싫으면 0으로) */
+}
+
+/* 배경 그라데이션: 조금 더 진하게 + 하단만 살짝 어둡게 */
+.file-window{
+  background: linear-gradient(
+    180deg,
+    rgba(245,250,255,0.40) 0%,
+    rgba(205,224,245,0.55) 24%,
+    rgba(175,206,235,0.62) 55%,
+    rgba(145,186,220,0.72) 100%  /* ✅ 하단 더 어두운 기운 */
+  );
 }
 
 /* 세로 화면 보정 */
 @media (max-aspect-ratio: 3/4){
   .file-window{
-    --file-topbar-h: 72px;     /* 상단바 높이 쓰는 값 유지 */
-    --file-bar-left: 18.2%;    /* 세로모드에서는 살짝 더 우측 */
+    --file-topbar-h: 44px;
+    --file-bar-left: 18.2%;
   }
-
   .file-title{
-    top: calc(var(--file-topbar-h) + 12.8%);
+    top: calc(var(--file-topbar-h) + 12.5%);
     font-size: clamp(58px, 8vw, 110px);
   }
 }
